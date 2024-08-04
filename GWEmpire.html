@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Great West Empire</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style1.css">
+	<link rel="shortcut icon" href="logo/Lereich.png" />
+	<script src="code.js"></script>
+	
+  </head>
+  <header>
+  	<nav>
+      <ul>
+	    <li><a href="index.html">Accueil</a></li>
+        <li><a href="Administratif.html">Administratif</a></li>
+        <li><a href="Eveche.html">Evêché</a></li>
+        <li><a href="Armee.html">Armée</a></li>
+        <li><a href="Employes.html">Employées impériales</a></li>
+		<li><a href="Citoyennes.html">Citoyennes</a></li>
+		<li><a href="Souterain.html">Monde souterrain</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <body>
+    <h1>The Great West Empire</h1>
+	<h2>L'empire vous salut</h2>
+	
+	<div class="decor">
+	<div class="content">
+	  <img src="paysages/GWEmpire 1.png" alt="" onclick="openModal(this)">
+	  <figcaption>Le chateau de Aix-la-chapelle, résidence de la Kaizer.</figcaption>
+	  <img src="paysages/GWEmpire 2.png" alt="" onclick="openModal(this)">
+	  <figcaption>L'un des sept manoirs impériaux, reconnus comme une des sept meveilles mondiales.</figcaption>
+	</div>
+	</div>
+	
+	<h2>Pouvoir</h2>
+	
+	<h3>Kaizer</h3>
+    <div class="gallery">
+	<div class="content">
+      <img src="waifu/GWEmpire/Kaizer.png" alt="" onclick="openModal(this)">
+	  <figcaption>Gloire à l'empire</figcaption>
+    </div>
+	</div>
+	
+	<h2>Armée</h2>
+	
+	<h3>Commander</h3>
+    <div class="gallery">
+	<div class="content">
+      <img src="waifu/GWEmpire/Commander.png" alt="" onclick="openModal(this)">
+	  <figcaption>Gloire à l'empire</figcaption>
+    </div>
+	</div>
+	
+	<h3>Maitresses de guerre (3)</h3>
+    <div class="gallery">
+	<div class="content">
+      <img src="waifu/GWEmpire/maitresse de guerre 1.png" alt="" onclick="openModal(this)">
+	  <figcaption>Gloire à l'empire</figcaption>
+	  <img src="waifu/GWEmpire/maitresse de guerre 2.png" alt="" onclick="openModal(this)">
+	  <figcaption>Gloire à l'empire</figcaption>
+	  <img src="waifu/GWEmpire/maitresse de guerre 3.png" alt="" onclick="openModal(this)">
+	  <figcaption>Gloire à l'empire</figcaption>
+    </div>
+	</div>
+	
+	<h3>Officière</h3>
+    <div class="gallery">
+	<div class="content">
+      <img src="waifu/GWEmpire/Officiere.png" alt="" onclick="openModal(this)">
+	  <figcaption>Gloire à l'empire</figcaption>
+    </div>
+	</div>
+	
+	<h3>Section armée (10)</h3>
+    <div class="gallery">
+	<div class="content">
+      <img src="waifu/GWEmpire/Soldat 1.png" alt="" onclick="openModal(this)">
+	  <figcaption>Gloire à l'empire</figcaption>
+	  <img src="waifu/GWEmpire/Soldat 2.png" alt="" onclick="openModal(this)">
+	  <figcaption>Gloire à l'empire</figcaption>
+	  <img src="waifu/GWEmpire/Soldat 3.png" alt="" onclick="openModal(this)">
+	  <figcaption>Gloire à l'empire</figcaption>
+	  <img src="waifu/GWEmpire/Soldat 4.png" alt="" onclick="openModal(this)">
+	  <figcaption>Gloire à l'empire</figcaption>
+	  <img src="waifu/GWEmpire/Soldat 5.png" alt="" onclick="openModal(this)">
+	  <figcaption>Gloire à l'empire</figcaption>
+	  <img src="waifu/GWEmpire/Soldat 6.png" alt="" onclick="openModal(this)">
+	  <figcaption>Gloire à l'empire</figcaption>
+	  <img src="waifu/GWEmpire/Soldat 7.png" alt="" onclick="openModal(this)">
+	  <figcaption>Gloire à l'empire</figcaption>
+	  <img src="waifu/GWEmpire/Soldat 8.png" alt="" onclick="openModal(this)">
+	  <figcaption>Gloire à l'empire</figcaption>
+	  <img src="waifu/GWEmpire/Soldat 9.png" alt="" onclick="openModal(this)">
+	  <figcaption>Gloire à l'empire</figcaption>
+	  <img src="waifu/GWEmpire/Soldat 10.png" alt="" onclick="openModal(this)">
+	  <figcaption>Gloire à l'empire</figcaption>
+    </div>
+	</div>
+
+	<div class="modal">
+        <div class="modal-content">
+            <div class="modal-navigation">
+                <button class="modal-prev" onclick="prevImage()">&lt;</button>
+                <div class="modal-image-container">
+                <img id="modal-img" src="" alt="" onclick="closeModal()">
+                </div>
+                <button class="modal-next" onclick="nextImage()">&gt;</button>
+            </div>
+                <div class="modal-caption" id="modal-caption"> </div>
+        </div>
+        <div class="modal-details"> </div>
+    </div>
+	
+  </body>
+</html>

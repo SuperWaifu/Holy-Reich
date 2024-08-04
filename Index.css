@@ -1,0 +1,134 @@
+@font-face {
+  font-family: 'Hestina Font';
+  src: url('Hestina Font.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(20,20,20,1) 50%, rgba(0,0,0,1) 100%);
+  font-family: 'Hestina Font'
+}
+
+h1 {
+  font-size: 60px;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  margin-top: 50px;
+}
+
+h2 {
+  font-size: 40px;
+  font-style: italic;
+  text-align: center;
+  color: white;
+  margin-left: 50px;
+}
+
+h3 {
+  font-size: 35px;
+  font-style: italic;
+  text-align: left;
+  color: white;
+  margin-left: 40px;
+  text-decoration: underline
+}
+
+h4 {
+  font-size: 40px;
+  text-align: center;
+  height: 100px;
+  overflow: hidden;
+}
+
+h4 a {
+  display: block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  transition: color 0.2s;s
+}
+
+h4 a:hover {
+  color: cyan;
+  transform: scale(1.2);
+  font-weight:bold;
+}
+
+.menulist ul {
+  font-size: 25px;
+  color: white;
+  padding-left: 2rem;
+  list-style-type: none;
+}
+.menulist li {
+  font-size: 35px;
+  color: white;
+  padding-left: 2rem;
+  list-style-type: none;
+}
+
+
+nav {
+  background-color: #222;
+  padding: 0px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  height: 55px;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+nav li {
+  margin: 0 10px;
+}
+
+nav li a {
+  display: block;
+  color: white;
+  font-size:30px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.2s;
+  padding:10px 10px;
+}
+
+nav li a:hover {
+  color: #f5c518;
+  transform: scale(1.1);
+  font-weight:bold;
+}
+
+
+.decor {
+  margin: 25px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.decor img {
+  display: inline-block;
+  max-width: 100%;
+  max-width: 750px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease-in-out;
+}
+
+.decor img:hover {
+  transform: scale(1.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.decor figcaption {
+  display: none;
+}

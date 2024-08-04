@@ -1,0 +1,94 @@
+@font-face {
+    font-family: 'MONO';
+    src: url('MONO.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }  
+
+.custom-audio-player {
+    max-width: 50%;
+    font-family: 'MONO';
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 8px;
+    background-color: #333;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.control-button {
+    font-family: 'MONO';
+    padding: 10px 10px;
+    font-size: 18px;
+    background-color: #555;
+    color: goldenrod;
+    border: none;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    border-radius: 4px;
+}
+
+.control-button:hover {
+    background-color: rgb(202, 172, 0);
+    border-radius: 10px;
+    color: #eee;
+}
+
+.timestamp {
+    font-size: 16px;
+    color: goldenrod;
+}
+
+.progress-container {
+    width: 150px;
+    height: 8px;
+    background-color: #666;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: gold;
+    width: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: width 0.1s ease;
+}
+
+.volume-slider {
+    width: 80px;
+    background: goldenrod;
+    height: 10px;
+    border-radius: 15px;
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+    opacity: 0.7;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: gold;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.08);
+    background: rgb(255, 255, 0);
+}
+
+.audio-player {
+    display: none;
+}
