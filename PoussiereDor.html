@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sultanat de la poussière d'or</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style1.css">
+	<link rel="stylesheet" href="Musique.css">
+	<link rel="shortcut icon" href="logo/Lereich.png" />
+	<script src="code.js"></script>
+	
+  </head>
+  <header>
+  	<nav>
+      <ul>
+	    <li><a href="index.html">Accueil</a></li>
+        <li><a href="Administratif.html">Administratif</a></li>
+        <li><a href="Eveche.html">Evêché</a></li>
+        <li><a href="Armee.html">Armée</a></li>
+        <li><a href="Employes.html">Employées impériales</a></li>
+		<li><a href="Citoyennes.html">Citoyennes</a></li>
+		<li><a href="Souterain.html">Monde souterrain</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <body>
+    <h1>Le Sultanat de la Poussière d'or</h1>
+	<h2>Mais ce n'est qu'un désert ? Avec des Cités-Etats !?</h2>
+	
+	<div class="decor">
+	<div class="content">
+	  <img src="paysages/Poussiere 1.png" alt="" onclick="openModal(this)">
+	  <figcaption>Il n'y a rien par ici ?</figcaption>
+	  <img src="paysages/Poussiere 2.png" alt="" onclick="openModal(this)">
+	  <figcaption>C'est vraiment vide ...</figcaption>
+	</div>
+	</div>
+	
+	<h1>Cité #1</h1>
+	<h2>Un oasis au milieu du désert, que peut-il mal se passer ?</h2>
+	
+	<div class="decor">
+	<div class="content">
+	  <img src="paysages/Cité 1 1.png" alt="" onclick="openModal(this)">
+	  <figcaption>Deleted Caption #1</figcaption>
+	  <img src="paysages/Cité 1 2.png" alt="" onclick="openModal(this)">
+	  <figcaption>Deleted Caption #2</figcaption>
+	</div>
+	</div>
+	
+	<h3>Mère</h3>
+    <div class="gallery">
+	<div class="content">
+      <img src="waifu/Poussiere/Mere.png" alt="" onclick="openModal(this)">
+	  <figcaption>La mère, régente de la ville.</figcaption>
+    </div>
+	</div>
+	
+	<h3>Filles (3)</h3>
+    <div class="gallery">
+	<div class="content">
+      <img src="waifu/Poussiere/Fille 1.png" alt="" onclick="openModal(this)">
+	  <figcaption>L'une des trois filles, elle impose l'ordre, tout naturellement.</figcaption>
+	  <img src="waifu/Poussiere/Fille 2.png" alt="" onclick="openModal(this)">
+	  <figcaption>L'une des trois filles, elle impose l'ordre, tout naturellement.</figcaption>
+	  <img src="waifu/Poussiere/Fille 3.png" alt="" onclick="openModal(this)">
+	  <figcaption>L'une des trois filles, elle impose l'ordre, tout naturellement.</figcaption>
+    </div>
+	</div>
+	
+	<h1>NewArk</h1>
+	<h2>Une communauté de pilleurs unis sous une même bannière, étrangement, politiquement stable.</h2>
+	
+	<div class="decor">
+	<div class="content">
+	  <img src="paysages/NewArk 1.png" alt="" onclick="openModal(this)">
+	  <figcaption>Oui, nos sources sont de très mauvais photographes ... Bon, cet homme est mort pour cette image</figcaption>
+	  <img src="paysages/NewArk 2.png" alt="" onclick="openModal(this)">
+	  <figcaption>L'entrée du périmètre fortifié, une fois encore au coût d'une vie.</figcaption>
+	</div>
+	</div>
+	
+		<div class="decor">
+	<audio class="audio-player" src="Musiques/Hymne New Ark.mp3"></audio>
+	<div class="custom-audio-player">
+		<button class="play-button control-button">Play</button>
+		<button class="pause-button control-button">Pause</button>
+		<button class="stop-button control-button">Stop</button>
+		<div class="progress-container">
+	<div class="progress-bar"></div>
+		</div>
+		<span class="timestamp">0:00 / 0:00</span>
+		<input type="range" class="volume-slider" min="0" max="1" step="0.01" value="0.7">
+	</div>
+	</div>
+	
+	<h3>Leader Suprème</h3>
+    <div class="gallery">
+	<div class="content">
+      <img src="waifu/Poussiere/Leader Suprème 1.png" alt="" onclick="openModal(this)">
+	  <figcaption>L'élue leader suprème après sa première élection</figcaption>
+	  <img src="waifu/Poussiere/Leader Suprème 2.png" alt="" onclick="openModal(this)">
+	  <figcaption>La leader suprème controlant les frontières</figcaption>
+    </div>
+	</div>
+	
+
+	<div class="modal">
+        <div class="modal-content">
+            <div class="modal-navigation">
+                <button class="modal-prev" onclick="prevImage()">&lt;</button>
+                <div class="modal-image-container">
+                <img id="modal-img" src="" alt="" onclick="closeModal()">
+                </div>
+                <button class="modal-next" onclick="nextImage()">&gt;</button>
+            </div>
+                <div class="modal-caption" id="modal-caption"> </div>
+        </div>
+        <div class="modal-details"> </div>
+    </div>
+	
+  </body>
+</html>
