@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Evêché</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style1.css">
+	<link rel="stylesheet" href="style paradis.css">
+	<link rel="shortcut icon" href="logo/Lereich.png" />
+	<script src="code.js"></script>
+	
+  </head>
+  <header>
+  	<nav>
+      <ul>
+	    <li><a href="index.html">Accueil</a></li>
+        <li><a href="Administratif.html">Administratif</a></li>
+        <li><a href="Eveche.html">Evêché</a></li>
+        <li><a href="Armee.html">Armée</a></li>
+        <li><a href="Employes.html">Employées impériales</a></li>
+		<li><a href="Citoyennes.html">Citoyennes</a></li>
+		<li><a href="Souterain.html">Monde souterrain</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <body>
+    <h1>Paradis</h1>
+	<h2>Lié au Holy-Reich</h2>
+	
+	<div class="background-animation"></div>
+
+	<div class="decor">
+	<div class="content">
+	  <img src="paysages/Paradis 1.png" alt="" onclick="openModal(this)">
+	  <figcaption>XXX</figcaption>
+	  <img src="paysages/Paradis 2.png" alt="" onclick="openModal(this)">
+	  <figcaption>XXX</figcaption>
+	</div>
+	</div>
+	
+	<h3>Anges (5)</h3>
+    <div class="gallery">
+	<div class="content">
+	  <img src="waifu/Eveche/Ange 1.png" alt="" onclick="openModal(this)">
+	  <figcaption> <div onclick="showCaption(this)" > <p class="description">Héhé...</p> <h6>
+		𝕮𝖊 𝖓'𝖊𝖘𝖙 𝖖𝖚'𝖚𝖓𝖊 𝕬𝖓𝖌𝖊, 𝖆 𝖛𝖗𝖆𝖎 𝖉𝖎𝖗𝖊 𝖈'𝖊𝖘𝖙 [XXX], 𝖚𝖓 𝖊𝖙𝖗𝖊 𝖉𝖎𝖛𝖎𝖓 𝖕𝖗𝖔𝖛𝖊𝖓𝖆𝖓𝖙 𝖉𝖚 𝖕𝖆𝖗𝖆𝖉𝖎𝖘.
+			<br><br>
+		E҉l҉l҉e҉ ҉n҉e҉ ҉d҉e҉v҉r҉a҉i҉ ҉p҉a҉s҉ ҉ê҉t҉r҉e҉ ҉i҉c҉i҉,҉  ҉l҉'҉e҉m҉p҉e҉r҉e҉u҉r҉ ҉l҉'҉a҉ ҉t҉r҉o҉p҉ ҉c҉ô҉t҉o҉y҉é҉e҉,҉  ҉e҉l҉l҉e҉ ҉r҉i҉s҉q҉u҉e҉ ҉d҉e҉ ҉f҉o҉r҉m҉e҉r҉ ҉l҉e҉ ҉l҉i҉e҉n҉
+			<br><br>
+		<a href="Paradis.html">P̵̧̧̬̊̂̓̃̿̊̕͠ą̴̬̦̪̟͚͓̮͊̑͗̓̉̽̕̕͝r̷̢͓̟̀̈́̎̋̆a̸̼̍̓̄͛͝d̶̡̛̮̗͓̥͌̏͊̊i̴̛̯̭̣͋̈́͆̎̋̀͐š̷̝̣̻̙͙̠͓̗̓̀͛̐</a>
+	  </h6> </div> </figcaption>
+	  <img src="waifu/Eveche/Ange 2.png" alt="" onclick="openModal(this)">
+	  <figcaption>Héhé...</figcaption>
+	  <img src="waifu/Eveche/Ange 3.png" alt="" onclick="openModal(this)">
+	  <figcaption>Héhé...</figcaption>
+	  <img src="waifu/Eveche/Ange 4.png" alt="" onclick="openModal(this)">
+	  <figcaption>Héhé...</figcaption>
+	  <img src="waifu/Eveche/Ange 5.png" alt="" onclick="openModal(this)">
+	  <figcaption>Héhé...</figcaption>
+    </div>
+	</div>
+
+	<h3>Harpie</h3>
+    <div class="gallery">
+	<div class="content">
+	  <img src="waifu/Eveche/Harpie.png" alt="" onclick="openModal(this)">
+	  <figcaption> <div onclick="showCaption(this)" > <p class="description">Héhé...</p> <h6>
+		X
+			<br><br>
+		XX
+			<br><br>
+		XXX
+	  </h6> </div> </figcaption>
+    </div>
+	</div>
+
+	<div class="modal">
+        <div class="modal-content">
+            <div class="modal-navigation">
+                <button class="modal-prev" onclick="prevImage()">&lt;</button>
+                <div class="modal-image-container">
+                <img id="modal-img" src="" alt="" onclick="closeModal()">
+                </div>
+                <button class="modal-next" onclick="nextImage()">&gt;</button>
+            </div>
+                <div class="modal-caption" id="modal-caption"> </div>
+        </div>
+        <div class="modal-details"> </div>
+    </div>
+
+	<div class="lore" onclick="closelore()">
+		<div class="lore-content">
+		    <div id="lore-caption"></div>
+
+			
+		</div>
+		
+	</div>
+	
+  </body>
+</html>
