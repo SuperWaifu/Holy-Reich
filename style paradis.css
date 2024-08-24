@@ -1,0 +1,339 @@
+.fade-out {
+    opacity: 1;
+    transition: opacity 1.0s ease-out;
+}
+
+.fade-out.fade {
+    opacity: 0;
+}
+
+
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+	background-attachment: fixed; /* Empêche l'arrière-plan de défiler */
+    z-index: -1; /* Placer derrière le contenu principal */
+}
+
+/* Créer des cercles flous de nuances de bleu qui bougent */
+.background-animation::before,
+.background-animation::after {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 0, 255, 0.2), rgba(0, 0, 255, 0));
+    animation: move 15s infinite linear;
+    filter: blur(100px);
+    top: -50%;
+    left: -50%;
+}
+
+/* Deuxième pseudo-élément pour plus de variations */
+.background-animation::after {
+    background: radial-gradient(circle, rgba(0, 150, 255, 0.2), rgba(0, 150, 255, 0));
+    animation-duration: 18s;
+}
+
+/* Animation pour déplacer les nuances de bleu */
+@keyframes move {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        transform: translate(50%, 50%) scale(1.1);
+    }
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+}
+
+@font-face {
+  font-family: 'Hestina Font';
+  src: url('Hestina Font.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bohemian Typewriter';
+  src: url('Bohemian Typewriter.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(20,20,20,1) 50%, rgba(0,0,0,1) 100%);
+  font-family: 'Hestina Font'
+}
+
+h1 {
+  font-size: 60px;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  margin-top: 50px;
+}
+h2 {
+  font-size: 40px;
+  font-style: oblique 10deg;
+  text-align: center;
+  color: white;
+}
+h3 {
+  font-size: 30px;
+  font-style: italic;
+  text-align: left;
+  color: white;
+  margin: 0px;
+}
+
+.description {
+    cursor:pointer;
+}
+.description:hover {
+    transform: scale(1.1);
+}
+h4, h6 {
+  display:none;
+}
+
+h7 {
+    padding-bottom: 25px;
+    font-family: 'Bohemian Typewriter';
+    display: flex;
+    max-width: 750px;
+    color: gold;
+    font-size: 25px;
+    text-align: left;
+    line-height: 120%;
+}
+
+h9 {
+	max-width: 50%;
+}
+
+h9 a {
+  font-size: 30px;
+  display: block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  transition: color 0.2s;s
+}
+
+.lien {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.lien li {
+	list-style-type:none;
+}
+
+h10 a {
+    color: darkblue; /* Définir la couleur de base des liens */
+    text-decoration: none; /* Supprimer le soulignement des liens, optionnel */
+}
+
+h10 a:visited {
+    color: darkblue; /* Définir la couleur pour les liens visités */
+}
+
+h9 a:hover {
+  color: cyan;
+  transform: scale(1.2);
+  font-weight:bold;
+}
+
+nav {
+  background-color: #222;
+  padding: 0px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  height: 55px;
+
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+nav li {
+  margin: 0 10px;
+}
+
+nav li a {
+  display: block;
+  color: white;
+  font-size:30px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.2s;
+  padding:10px 10px;
+}
+
+nav li a:hover {
+  color: #f5c518;
+  transform: scale(1.1);
+  font-weight:bold;
+}
+
+.decor {
+  margin: 25px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.decor img {
+  display: inline-block;
+  max-width: 100%;
+  max-width: 650px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease-in-out;
+}
+
+.decor img:hover {
+  transform: scale(1.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.decor figcaption {
+  display: none;
+}
+
+.gallery {
+  margin: 25px;
+}
+
+.gallery img {
+  display: inline-block;
+  max-width: 100%;
+  max-width: 340px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease-in-out;
+}
+
+.gallery img:hover {
+  transform: scale(1.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.gallery figcaption {
+  display: none;
+}
+
+.content {
+  position: relative;
+  display: inline-block;
+}
+
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	color: cyan;
+    padding: 10px;
+    font-size: 40px;
+    font-style: italic;
+    text-align: center;
+}
+
+.modal-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    color: #fff;
+}
+
+.modal-navigation button {
+    padding:20px;
+    border: none;
+    background: none;
+    font-size: 100px;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+}
+
+.modal-navigation button:hover {
+    color: #ccc;
+    transform: scale(1.1);
+}
+
+.modal img {
+	max-width: 170%;
+	object-fit: contain;
+	margin: 0 auto;
+}
+
+.modal img:hover {
+	transform: scale(1.01);
+	cursor:pointer
+}
+
+.lore {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+}
+
+.lore-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	height: auto;
+	color: white;
+	padding: 10px;
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.LORE {
+    display: table-cell;
+    padding-left: 20px;
+    cursor: pointer;
+}
