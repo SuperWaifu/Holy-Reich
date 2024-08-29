@@ -1,0 +1,30 @@
+.ecusson {
+	display: flex;
+	justify-content: space-between; /* Espace entre les images-légendes */
+	align-items: flex-start; /* Alignement en haut du conteneur */
+	margin: 20px 0; /* Espace vertical autour du conteneur */
+	width: 100%; /* Prendre toute la largeur de la page */
+}
+
+        /* Nouveau conteneur pour chaque bloc image-légende */
+.image-block {
+	display: flex;
+	flex-direction: column; /* Disposition verticale pour image et légende */
+	align-items: center; /* Centrer l'image et la légende horizontalement */
+	width: 45%; /* Largeur de chaque bloc image-légende */
+}
+
+        /* Style pour les images */
+.image-block img {
+	max-width: 100%; /* L'image occupe toute la largeur du bloc */
+	height: auto; /* Conserver le ratio d'aspect de l'image */
+}
+
+        /* Style pour les légendes */
+.legend {
+	margin-top: 10px; /* Espacement entre l'image et la légende */
+	text-align: center;
+	text-decoration: underline; /* Souligner les légendes */
+	font-size : 25px;
+	color : lightgreen;
+}

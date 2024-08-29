@@ -55,6 +55,10 @@ h4 a:hover {
   font-weight:bold;
 }
 
+.menulist {
+  flex: 1; /* Occuper l'espace disponible sans déborder */
+}
+
 .menulist ul {
   font-size: 25px;
   color: white;
@@ -91,7 +95,7 @@ nav li {
 nav li a {
   display: block;
   color: white;
-  font-size:30px;
+  font-size:25px;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
@@ -131,4 +135,59 @@ nav li a:hover {
 
 .decor figcaption {
   display: none;
+}
+
+.slideshow {
+  flex: 1; /* Occupe l'espace restant après la liste */
+  max-width: 400px; /* Limite la largeur du diaporama */
+  overflow: hidden; /* Cache les parties débordantes des images */
+  margin-left: 2rem; /* Espacement à gauche du diaporama */
+  box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+  display: flex; /* Utiliser Flexbox pour aligner les images horizontalement */
+  flex-wrap: nowrap; /* Empêche les images de passer à la ligne suivante */
+  margin-bottom: 20px; /* Ajoute de l'espace entre chaque diaporama */
+}
+
+.slideshow img {
+  width: 100%;
+  animation: slide 20s infinite; /* Animation CSS pour défiler les images */
+  border-radius: 5px;
+}
+
+.slideshow-container {
+    display: flex; /* Utiliser Flexbox pour aligner les diaporamas verticalement */
+    flex-direction: column; /* Aligne les diaporamas verticalement */
+    gap: 280px; /* Espace entre les diaporamas */
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0%);
+  }
+  25% {
+    transform: translateX(0%); /* Pause sur la première image */
+  }
+  33% {
+    transform: translateX(-100%);
+  }
+  58% {
+    transform: translateX(-100%); /* Pause sur la deuxième image */
+  }
+  66% {
+    transform: translateX(-200%);
+  }
+  91% {
+    transform: translateX(-200%); /* Pause sur la troisième image */
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.alligne {
+  display: flex; /* Positionner les éléments en ligne */
+  align-items: flex-start; /* Aligner les éléments en haut */
+  width: 100%; /* S'assurer que le conteneur utilise toute la largeur */
+  padding: 20px; /* Ajoute un padding autour de tout le conteneur */
+  box-sizing: border-box; /* Inclut le padding dans la largeur totale */
 }
