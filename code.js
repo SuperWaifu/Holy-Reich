@@ -160,4 +160,19 @@ document.addEventListener('DOMContentLoaded', function() {
       player.addEventListener('timeupdate', () => updateProgressBar(index));
     });
   });
-  
+
+document.addEventListener('DOMContentLoaded', function() {  
+    var textedelettres = document.querySelectorAll('.textedelettre');
+    var lettres = document.querySelectorAll('.lettre');
+
+    textedelettres.forEach(function(text, index) {
+        text.addEventListener('click', function() {
+            var lettre = lettres[index];
+            if (lettre.classList.contains('cache')) {
+                lettre.classList.remove('cache');
+            } else {
+                lettre.classList.add('cache');
+            }
+        });
+    });
+});

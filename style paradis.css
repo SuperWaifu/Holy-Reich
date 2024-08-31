@@ -113,6 +113,25 @@ h7 {
     line-height: 120%;
 }
 
+h8 {
+            background-color: #130c4d; /* Couleur de fond verte */
+            color: #f0e36b; /* Couleur du texte blanche */
+            padding: 10px 20px; /* Espacement intérieur pour ressembler à des boutons */
+            text-align: center; /* Centrer le texte à l'intérieur */
+            text-decoration: none; /* Supprimer la décoration de texte (soulignement) */
+            border: none; /* Aucun bordure */
+            border-radius: 5px; /* Coins arrondis pour un effet de bouton */
+            cursor: pointer; /* Curseur de souris en pointeur pour indiquer la cliquabilité */
+            font-size: 16px; /* Taille de la police */
+            margin: 5px; /* Espace autour de chaque bouton */
+            transition: background-color 0.3s ease; /* Transition pour l'effet hover */
+        }
+
+h8:hover {
+            background-color: #f0e36b; /* Couleur de fond changée lors du survol */
+			color: #130c4d;
+        }
+
 h9 {
 	max-width: 50%;
 }
@@ -175,7 +194,7 @@ nav li {
 nav li a {
   display: block;
   color: white;
-  font-size:30px;
+  font-size:25px;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
@@ -335,4 +354,34 @@ nav li a:hover {
     display: table-cell;
     padding-left: 20px;
     cursor: pointer;
+}
+
+.textedelettre {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.lettre {
+    width: 60%;
+    margin: 20px auto;
+    padding: 50px 20px 20px;
+    border: 1px solid #ccc;
+    background-color: #f2eecb;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.timbre {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.lettre-contenu {
+    margin-top: 60px;
+    text-align: left;
+}
+
+.cache {
+    display: none;
 }
