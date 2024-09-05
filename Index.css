@@ -191,3 +191,31 @@ nav li a:hover {
   padding: 20px; /* Ajoute un padding autour de tout le conteneur */
   box-sizing: border-box; /* Inclut le padding dans la largeur totale */
 }
+
+.annonce {
+    width: 100%; /* Prend toute la largeur de la page */
+    overflow: hidden; /* Cache le texte débordant */
+    white-space: nowrap; /* Empêche le texte de passer à la ligne */
+    box-sizing: border-box; /* Inclut le padding dans la largeur */
+    background-color: rgba(0, 0, 0, 0.7); /* Ajoute un fond semi-transparent pour le contraste */
+    padding: 10px 0; /* Espace vertical dans le bandeau */
+    position: absolute; /* Fixe le bandeau en haut de la page */
+    z-index: 1000; /* Met le bandeau au-dessus de tout le reste */
+}
+
+.annonce p {
+    display: inline-block; /* Permet l'animation du texte en ligne */
+    padding-left: 100%; /* Départ en dehors de la vue */
+    font-size: 20px; /* Taille du texte */
+    color: white; /* Couleur du texte */
+    animation: scroll-text 60s linear infinite; /* Animation pour faire défiler le texte */
+}
+
+@keyframes scroll-text {
+    0% {
+        transform: translateX(0); /* Début du défilement à la position de départ */
+    }
+    100% {
+        transform: translateX(-100%); /* Fin du défilement, le texte a disparu à gauche */
+    }
+}
