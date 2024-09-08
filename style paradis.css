@@ -385,3 +385,9 @@ nav li a:hover {
 .cache {
     display: none;
 }
+
+.signature {
+    width: 150px;
+    display: block;
+    margin-top: 10px;
+}
