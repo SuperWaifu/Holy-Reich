@@ -369,6 +369,16 @@ nav li a:hover {
     background-color: #f2eecb;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     position: relative;
+	z-index: 1;
+}
+
+.image-container {
+	width: 100%;
+    margin: 20px auto;
+    padding: 50px 20px 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    position: relative;
+	z-index: 1;
 }
 
 .timbre {
@@ -390,4 +400,9 @@ nav li a:hover {
     width: 150px;
     display: block;
     margin-top: 10px;
+}
+
+.tableau {
+    width: 1000px;
+    height: auto;
 }
