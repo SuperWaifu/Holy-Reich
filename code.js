@@ -161,7 +161,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-document.addEventListener('DOMContentLoaded', function() {  
+document.addEventListener('DOMContentLoaded', function() {
+    // Gestion des lettres
     var textedelettres = document.querySelectorAll('.textedelettre');
     var lettres = document.querySelectorAll('.lettre');
 
@@ -172,6 +173,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 lettre.classList.remove('cache');
             } else {
                 lettre.classList.add('cache');
+            }
+        });
+    });
+
+    // Gestion des boutons d'images
+    document.querySelectorAll('.toggle-button').forEach(function(button) {
+        button.addEventListener('click', function() {
+            var targetId = this.getAttribute('data-target');
+            var targetElement = document.getElementById(targetId);
+
+            console.log('Ciblage de l’élément:', targetId);
+            console.log('Élément cible:', targetElement);
+
+            if (targetElement.classList.contains('cache')) {
+                targetElement.classList.remove('cache');
+            } else {
+                targetElement.classList.add('cache');
             }
         });
     });
