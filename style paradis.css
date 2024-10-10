@@ -373,7 +373,6 @@ nav li a:hover {
 }
 
 .image-container {
-	width: 100%;
     margin: 20px auto;
     padding: 50px 20px 20px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
