@@ -24,7 +24,7 @@
     <div id="main-content">
         <!-- Section pour les informations de la musique en cours -->
         <div id="current-music-info">
-            <img src="music-cover.jpg" alt="Album Cover" id="album-cover">
+            <img src="logo/CD.png" alt="Album Cover" id="album-cover">
             <h1 id="main-music-title">Aucune musique en cours</h1> <!-- Section centrale (titre) -->
 			<h2 id="main-music-artist">~~~</h2> <!-- Section centrale (auteur) -->
         </div>
@@ -32,7 +32,8 @@
         <!-- Section principale pour la recherche, file d'attente, paroles ou accueil -->
         <div id="center-section">
             <!-- Contenu de base -->
-            <div id="home-section">
+            <div id="classic-view" class="view">
+			<div id="home-section">
                 <h1>Bienvenue</h1>
                 <p>Explorez nos collections de musique.</p>
                 <!-- Listes de musiques avec catégories -->
@@ -76,13 +77,21 @@
 				</div>
 			</div>
             </div>
+			</div>
+			
+			<div id="lyrics-view" class="view hidden">
+        <div id="lyrics-content">
+            <h2 id="lyrics-title">Paroles</h2>
+            <pre id="lyrics-text">Les paroles s'afficheront ici...</pre>
+        </div>
+    </div>
         </div>
     </div>
 
     <!-- Barre de lecture en bas -->
     <div id="player-bar">
         <div id="music-info">
-            <img src="music-cover.jpg" alt="Cover" id="player-cover">
+            <img src="logo/ReichTune.png" alt="Cover" id="player-cover">
             <div id="player-details">
 				<span id="player-title">Aucune musique en cours</span> <!-- Élement pour le titre -->
 				<span id="player-artist">~~~</span> <!-- Élement pour l'auteur -->

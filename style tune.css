@@ -68,6 +68,19 @@ body {
     overflow-y: auto;
 }
 
+#center-section::-webkit-scrollbar-thumb {
+    background: #ffffff; /* Couleur du pouce */
+    border-radius: 4px; /* Arrondi */
+}
+
+#center-section::-webkit-scrollbar {
+    width: 10px; /* Largeur de la barre de défilement */
+}
+
+#center-section::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3; /* Couleur au survol */
+}
+
 /* Barre de lecture */
 #player-bar {
     position: fixed;
@@ -216,6 +229,7 @@ input[type="range"] {
 
 .music-title, .music-artist {
     margin: 10px 0;
+	text-align: center;
 }
 
 .music-title {
@@ -226,4 +240,68 @@ input[type="range"] {
 .music-artist {
     font-size: 18px;
     color: #b3b3b3;
+}
+
+/* Styles pour cacher les vues */
+.hidden {
+    display: none;
+}
+
+/* Vue des paroles */
+#lyrics-view {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background: linear-gradient(45deg, #6a11cb, #2575fc); /* Dégradé */
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+	overflow: hidden; /* Empêche tout débordement inattendu */
+}
+
+#lyrics-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#lyrics-text {
+    font-size: 18px;
+    white-space: pre-wrap; /* Garde les retours à la ligne */
+    line-height: 1.5;
+}
+
+/* Bouton activé */
+#lyrics-btn.active {
+    background-color: #621bc1;
+    color: white;
+}
+
+#lyrics-content {
+    max-height: 100%; /* Ajuste la hauteur en fonction de son conteneur */
+    overflow-y: auto; /* Ajoute une barre de défilement verticale si nécessaire */
+    padding: 10px; /* Un peu d'espace autour des paroles */
+    background: linear-gradient(to bottom, #6a11cb, #2575fc); /* Dégradé */
+    color: white; /* Couleur du texte */
+    border-radius: 10px; /* Bords arrondis pour un style soigné */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Légère ombre */
+}
+
+#lyrics-content::-webkit-scrollbar {
+    width: 10px; /* Largeur de la barre de défilement */
+}
+
+#lyrics-content::-webkit-scrollbar-thumb {
+    background: #ffffff; /* Couleur du pouce */
+    border-radius: 4px; /* Arrondi */
+}
+
+#lyrics-content::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3; /* Couleur au survol */
+}
+
+#lyrics-content::-webkit-scrollbar-track {
+    background: #444; /* Couleur de l’arrière-plan */
 }

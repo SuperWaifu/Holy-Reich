@@ -11,6 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainMusicTitle = document.getElementById('main-music-title'); 
     const mainMusicArtist = document.getElementById('main-music-artist'); 
 
+	const lyricsBtn = document.getElementById('lyrics-btn');
+    const classicView = document.getElementById('classic-view');
+    const lyricsView = document.getElementById('lyrics-view');
+    const lyricsText = document.getElementById('lyrics-text');
+    const lyricsTitle = document.getElementById('lyrics-title');
+
     let currentAudioPlayer = null; // Référence de l'audio actuellement en lecture
     let currentMusicTitle = '';
     let currentMusicArtist = '';
@@ -153,4 +159,41 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+	
+	// Événement au clic sur le bouton Paroles
+	lyricsBtn.addEventListener('click', toggleLyricsView);
+
+	// Fonction pour basculer entre les vues
+	function toggleLyricsView() {
+		if (lyricsBtn.classList.contains('active')) {
+			// Revenir à la vue classique
+			lyricsBtn.classList.remove('active');
+			lyricsView.classList.add('hidden');
+			classicView.classList.remove('hidden');
+			lyricsView.style.display = "none"; // Cache la vue des paroles
+			classicView.style.display = "block"; // Réaffiche la vue classique
+		} else {
+			// Afficher les paroles
+			lyricsBtn.classList.add('active');
+			lyricsView.classList.remove('hidden');
+			classicView.classList.add('hidden');
+			lyricsView.style.display = "block"; // Affiche la vue des paroles
+			classicView.style.display = "none"; // Cache la vue classique
+
+				// Charger les paroles de la musique en cours
+			if (currentMusicTitle && lyricsDatabase[currentMusicTitle]) {
+				lyricsTitle.textContent = `Paroles de "${currentMusicTitle}"`; // Affiche le titre
+				lyricsText.innerHTML = lyricsDatabase[currentMusicTitle]; // Affiche les paroles avec HTML interprété
+			} else {
+				lyricsTitle.textContent = "Paroles indisponibles";
+				lyricsText.textContent = "Les paroles de cette musique ne sont pas disponibles.";
+			}
+		}
+	}
+
+	// Base de données de paroles
+	const lyricsDatabase = {
+		"Hymne du Holy-Reich": "<strong>Couplet 1 :</strong><br>Vers les cieux se dresse notre bannière,<br>Sous le regard des anges, nous marchons fiers.<br>Holy-Reich, notre empire sacré,<br>À jamais fort, jamais brisé.<strong><br><br>Refrain :</strong><br>Holy-Reich, terre de lumière,<br>Gloire et honneur à nos vaillants guerriers.<br>Sous ta protection, nous sommes unis,<br>Pour la justice, pour la paix, nous combattons sans répit.<br><br><strong>Couplet 2 :</strong><br>Au loin s'élèvent les ombres de Haremcia,<br>Avec leurs démons, ils sèment l'anarchie.<br>Mais nous, soldats de la foi, indomptables,<br>Repousserons les ténèbres, notre cause est implacable.<br><br><strong>[Refrain]</strong><br><br><strong>Couplet 3 :</strong><br>Dans la lumière, notre guide éclatant,<br>La vérité triomphe, jamais hésitant.<br>Nos cœurs battent d'un même élan glorieux,<br>Pour notre empire, pour nos cieux lumineux.<br><br><strong>[Refrain]</strong><br><br><strong>Couplet 4 :</strong><br>Que le tonnerre résonne, que le soleil brille,<br>Dans chaque bataille, notre courage scintille.<br>Holy-Reich, empire béni, notre foyer,<br>Nous marcherons toujours pour toi, sous les feux des éclats d'acier.<br><br><strong>[Refrain]</strong><br><br><strong>Couplet 5 :</strong><br>Nos ennemis tremblent face à notre foi,<br>Car dans nos âmes, l’espoir jamais ne ploie.<br>Holy-Reich, toi l'éternelle clarté,<br>À jamais victorieux, notre serment est scellé.<br><br><strong>[Refrain]</strong>",
+		"Song Title 2": "Paroles de la deuxième chanson...",
+	};
 });
