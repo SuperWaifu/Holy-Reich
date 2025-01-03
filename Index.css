@@ -74,7 +74,7 @@ h4 a:hover {
 
 
 nav {
-  background-color: #222;
+  background: linear-gradient(201deg, rgba(2,0,36,1) 0%, rgba(91,24,157,1) 47%, rgba(99,25,0,1) 100%);;
   padding: 0px 0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
   height: 55px;
@@ -107,6 +107,24 @@ nav li a:hover {
   color: #f5c518;
   transform: scale(1.1);
   font-weight:bold;
+}
+
+.NAV-index {
+  height: 40px; /* Ajuste selon la taille de ton logo */
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+  transition: transform 0.2s;
+  filter: drop-shadow(0 0 15px white); /* Ombre blanche continue */
+}
+
+nav li:first-child {
+  margin-right: 20px; /* Ajoute un espace à droite du logo */
+}
+
+nav li a:hover .NAV-index {
+  transform: scale(1.1); /* Agrandissement au survol */
+  filter: brightness(1.2); /* Augmente la luminosité du logo au survol */
 }
 
 
@@ -193,12 +211,11 @@ nav li a:hover {
 }
 
 .annonce {
-    width: 100%; /* Prend toute la largeur de la page */
+    width: 99.5%; /* Prend toute la largeur de la page */
     overflow: hidden; /* Cache le texte débordant */
     white-space: nowrap; /* Empêche le texte de passer à la ligne */
     box-sizing: border-box; /* Inclut le padding dans la largeur */
     background-color: rgba(0, 0, 0, 0.7); /* Ajoute un fond semi-transparent pour le contraste */
-    padding: 10px 0; /* Espace vertical dans le bandeau */
     position: absolute; /* Fixe le bandeau en haut de la page */
     z-index: 1000; /* Met le bandeau au-dessus de tout le reste */
 }
