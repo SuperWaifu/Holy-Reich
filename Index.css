@@ -160,12 +160,13 @@ nav li a:hover .NAV-index {
 .app {
   max-width: 100px; /* Ajuste la taille du logo */
   border-radius: 5px; /* Ajoute un arrondi si nécessaire */
-  transition: transform 0.2s ease-in-out; /* Ajoute des animations */
+  transition: transform 0.70s ease-in-out; /* Ajoute des animations */
 }
 
 .app:hover {
-  transform: scale(1.1); /* Effet de zoom au survol */
+  transform: rotate(360deg); /* Fait tourner le logo d'un tour complet */
 }
+
 
 .decor img {
   max-width: 750px; /* Ajuste la taille du drapeau */
