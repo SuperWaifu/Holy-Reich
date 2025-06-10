@@ -286,7 +286,7 @@ nav li a:hover .NAV-index {
 }
 
 .modal img {
-	max-width: 170%;
+	max-width: 512px;
 	object-fit: contain;
 	margin: 0 auto;
 }
