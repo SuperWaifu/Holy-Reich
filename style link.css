@@ -65,3 +65,185 @@ a:hover {
     background-color: #ad1f1f;
 	transform: scale(1.1);
 }
+
+/* Liste relation */
+
+/* Conteneur de chaque ligne */
+.relation-item {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+/* Le lien centré */
+.lien-pays {
+  display: inline-block;
+  font-size: 30px;
+  text-decoration: none;
+  color: #99E8CE;
+  text-align: center;
+}
+
+/* Bouton d’accords — position absolue par rapport au centre */
+.accord-btn {
+  position: absolute;
+  white-space: nowrap;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 6px 10px;
+  font-size: 14px;
+  background: linear-gradient(135deg, #f0f0f0, #d0d0d0);
+  border: 1px solid #aaa;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-weight: bold;
+}
+
+.accord-btn:hover {
+  background: linear-gradient(135deg, #e6ffe6, #ccf2ff);
+  transform: scale(1.05);
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+  border-color: #888;
+}
+
+.accord-btn.left {
+  left: calc(50% - 400px);
+}
+
+.accord-btn.right {
+  left: calc(50% + 400px);
+}
+
+.accord-btn:hover {
+  background-color: #bbb;
+}
+
+.accord-btn[data-type="alliée"] {
+  background: linear-gradient(135deg, #d2fbd2, #a5e9a5);
+  border-color: #6cbe6c;
+}
+
+.accord-btn[data-type="amie"] {
+  background: linear-gradient(135deg, #d2faff, #a5e2ff);
+  border-color: #6cbad0;
+}
+
+.accord-btn[data-type="neutre"] {
+  background: linear-gradient(135deg, #eeeeee, #cccccc);
+  border-color: #999;
+}
+
+.accord-btn[data-type="hostile"] {
+  background: linear-gradient(135deg, #ffe0b3, #ffb366);
+  border-color: #cc7a00;
+}
+
+.accord-btn[data-type="ennemie"] {
+  background: linear-gradient(135deg, #ffcccc, #cc6666);
+  border-color: #990000;
+}
+
+.accord-btn[data-type="alliée"]:hover {
+  background: linear-gradient(135deg, #b2f5b2, #8de68d);
+}
+
+.accord-btn[data-type="amie"]:hover {
+  background: linear-gradient(135deg, #b2f0ff, #7fd8ff);
+}
+
+.accord-btn[data-type="neutre"]:hover {
+  background: linear-gradient(135deg, #dddddd, #bbbbbb);
+}
+
+.accord-btn[data-type="hostile"]:hover {
+  background: linear-gradient(135deg, #ffd699, #ff9933);
+}
+
+.accord-btn[data-type="ennemie"]:hover {
+  background: linear-gradient(135deg, #ff9999, #cc3333);
+}
+
+.accords-box {
+  position: absolute;
+  border-radius: 12px;
+  padding: 1.2em 1.5em;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.7);
+  z-index: 15;
+  max-width: 320px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+
+.accords-box {
+  background: rgba(20, 20, 30, 0.9);
+  color: #ddd;
+  border: 2px solid transparent;
+}
+
+.accords-box.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+.accords-box.alliee {
+  border-color: #28a745;
+  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.7);
+}
+
+.accords-box.amie {
+  border-color: #4a90e2;
+  box-shadow: 0 6px 20px rgba(74, 144, 226, 0.7);
+}
+
+.accords-box.neutre {
+  border-color: #777;
+  box-shadow: 0 6px 20px rgba(119, 119, 119, 0.7);
+}
+
+.accords-box.hostile {
+  border-color: #e07b39;
+  box-shadow: 0 6px 20px rgba(224, 123, 57, 0.7);
+}
+
+.accords-box.ennemie {
+  border-color: #d9534f;
+  box-shadow: 0 6px 20px rgba(217, 83, 79, 0.8);
+}
+
+
+.accords-box ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.accords-box li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #ddd;
+}
+
+.accords-box li span {
+  font-style: italic;
+  color: #aaa;
+  font-size: 13px;
+}
+
+.accords-box img {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  object-fit: contain;
+  border: 1px solid #555;
+}

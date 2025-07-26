@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="style link.css">
 	<link rel="shortcut icon" href="logo/Lereich.png" />
 	<script src="code.js"></script>
-	<script src="code link.js"></script>
+	<script src="code link.js" defer></script>
 	
   </head>
   <header>
@@ -123,27 +123,129 @@
     </div>
 	</div>
 
-	<p> </p>
+	<br>
+
 	<div class="lien">
-    <h1>Relations étrangères</h1>
-	<br>
-	<h2>Puissance alliée</h2>
-    <h9> <li><a href="RoyaumeCeleste.html">🍁 Royaume Celeste 🍁</a></li> </h9>
-	<br>
-	<h2>Puissance amicale</h2>
-    <h9> <li><a href="GWEmpire.html">🏰 The Great West Empire 🏰</a></li> </h9>
-	<br>
-	<h2>Puissance neutre</h2>
-    <h9> <li><a href="https://earth-90.github.io/Haremcia/" class="external-link">🌋 Haremcia 🌋</a></li> </h9>
-	<h9> <li><a href="https://earth-90.github.io/Haremcia/ged.html" class="external-link">⚙️ Grand Est Domain ⚙️</a></li> </h9>
-	<br>
-	<h2>Puissance hostile</h2>
-    <h9> <li><a href="PoussiereDor.html">💣 Sultanat de la poussière d'or 💣</a></li> </h9>
-	<h9> <li><a href="https://earth-90.github.io/Haremcia/urss.html" class="external-link">🔥 United Radical South States 🔥</a></li> </h9>
-	<br>
-	<h2>Puissance ennemie</h2>
-	<h2>xxx</h2>
+  <h1>Relations étrangères</h1>
+
+	<div class="relation">
+	  <h2>Puissance alliée</h2>
+	  <div class="relation-item">
+		<button class="accord-btn left" data-target="accords-royaume-celeste" data-type="alliée">⚖️ Accords</button>
+		<a href="RoyaumeCeleste.html" class="lien-pays">🍁 Royaume Céleste 🍁</a>
+	  </div>
 	</div>
+
+	<div class="relation">
+	  <h2>Puissance amicale</h2>
+	  <div class="relation-item">
+		<button class="accord-btn right" data-target="accords-gwe" data-type="amie">⚖️ Accords</button>
+		<a href="GWEmpire.html" class="lien-pays">🏰 The Great West Empire 🏰</a>
+	  </div>
+	</div>
+	<div class="relation">
+    <h2>Puissance neutre</h2>
+    <div class="relation-item">
+      <button class="accord-btn left" data-target="accords-haremcia" data-type="neutre">⚖️ Accords</button>
+      <a href="https://earth-90.github.io/Haremcia/" class="lien-pays external-link">🌋 Haremcia 🌋</a>
+    </div>
+    <div class="relation-item">
+      <button class="accord-btn right" data-target="accords-ged" data-type="neutre">⚖️ Accords</button>
+      <a href="https://earth-90.github.io/Haremcia/ged.html" class="lien-pays external-link">⚙️ Grand Est Domain ⚙️</a>
+    </div>
+  </div>
+
+  <div class="relation">
+    <h2>Puissance hostile</h2>
+    <div class="relation-item">
+      <button class="accord-btn left" data-target="accords-poussiere-dor" data-type="hostile">⚖️ Accords</button>
+      <a href="PoussiereDor.html" class="lien-pays">💣 Sultanat de la poussière d'or 💣</a>
+    </div>
+    <div class="relation-item">
+      <button class="accord-btn right" data-target="accords-urss" data-type="hostile">⚖️ Accords</button>
+      <a href="https://earth-90.github.io/Haremcia/urss.html" class="lien-pays external-link">🔥 United Radical South States 🔥</a>
+    </div>
+  </div>
+
+  <div class="relation">
+    <h2>Puissance ennemie</h2>
+    <div class="relation-item">
+      <button class="accord-btn left" data-target="accords-ennemie" data-type="ennemie">⚖️ Accords</button>
+      <a href="#" class="lien-pays">❌ Aucune nation ennemie ❌</a>
+    </div>
+  </div>
+</div>
+
+
+	 
+	<div id="accords-royaume-celeste" class="accords-box alliee hidden">
+	  <ul>
+		<li>
+		  <img src="logo/contract/alliance.png" alt="Alliance">
+		  Pacte de Morganite <span>15/10/135</span>
+		</li>
+		<li>
+		  <img src="logo/contract/gear.png" alt="Industriel">
+		  Acte du complexe militaro-industriel <span>23/03/141</span>
+		</li>
+	  </ul>
+	</div>
+
+	<div id="accords-gwe" class="accords-box amie hidden">
+	  <ul>
+		<li>
+		  <img src="logo/contract/compas.png" alt="Compas">
+		  Accords du bloc de l'est <span>01/01/122</span>
+		</li>
+	  </ul>
+	</div>
+	
+	<div id="accords-haremcia" class="accords-box neutre hidden">
+	  <ul>
+		<li>
+		  <img src="logo3.png" alt="Logo Accord 1">
+		  XXX <span>000</span>
+		</li>
+	  </ul>
+	</div>
+	
+	<div id="accords-ged" class="accords-box neutre hidden">
+	  <ul>
+		<li>
+		  <img src="logo3.png" alt="Logo Accord 1">
+		  XXX <span>000</span>
+		</li>
+	  </ul>
+	</div>
+	
+	<div id="accords-poussiere-dor" class="accords-box hostile hidden">
+	  <ul>
+		<li>
+		  <img src="logo/contract/compas.png" alt="Compas">
+		  Accords du bloc de l'est <span>01/01/122</span>
+		</li>
+	  </ul>
+	</div>
+	
+	<div id="accords-urss" class="accords-box hostile hidden">
+	  <ul>
+		<li>
+		  <img src="logo/contract/peace.png" alt="Peace">
+		  Cessez le feu <span>30/11/140</span>
+		</li>
+	  </ul>
+	</div>
+	
+	<div id="accords-ennemie" class="accords-box ennemie hidden">
+	  <ul>
+		<li>
+		  <img src="logo3.png" alt="Logo Accord 1">
+		  XXX <span>000</span>
+		</li>
+	  </ul>
+	</div>
+  
+
 
 	<br><br>
 	<h2>=====</h2>
@@ -174,6 +276,7 @@
             </div>
         </div>
     </div>
+	
 	
   </body>
 </html>
