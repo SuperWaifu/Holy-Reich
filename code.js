@@ -92,7 +92,9 @@ function showImage(index) {
 function closeModal() {
 	document.querySelector(".modal").style.display = "none";
 	document.body.style.overflow = 'auto';
+	document.querySelector(".modal-details").innerHTML = "";
 }
+
 
 
 document.addEventListener('DOMContentLoaded', function() {
