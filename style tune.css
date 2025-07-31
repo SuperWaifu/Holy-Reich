@@ -133,6 +133,19 @@ body {
 }
 
 
+#play-icon {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+#play-pause {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
 #music-info {
     display: flex;
     align-items: center;
