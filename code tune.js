@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentMusicArtist = '';
 
     // Sélection de tous les conteneurs de musiques et des éléments audio
-    const musicItems = document.querySelectorAll('.music-item');
+    const musicItems = Array.from(document.querySelectorAll('.music-item'));
     const audioPlayers = document.querySelectorAll('audio');
 	
 	const playerCover = document.getElementById('player-cover'); // Cover dans la barre du bas
@@ -169,6 +169,57 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+	
+	
+	
+	// Fonction pour lire les musiques d'une section à la suite
+	function playMusicListSequentially(startIndex, musicList) {
+		stopAllMusic();
+
+		function playNext(index) {
+			if (index >= musicList.length) return;
+
+			const item = musicList[index];
+			const musicTitle = item.getAttribute('data-title');
+			const musicArtist = item.getAttribute('data-artist');
+			const musicCover = item.getAttribute('data-cover');
+			const audio = audioPlayers[musicItems.indexOf(item)];
+
+			if (!audio) return;
+
+			updateMusicInfo(musicTitle, musicArtist, musicCover);
+			playIcon.src = "logo/pause.png";
+			currentAudioPlayer = audio;
+			audio.play();
+
+			audio.onended = () => {
+				playNext(index + 1);
+			};
+		}
+
+		playNext(startIndex);
+	}
+
+	// Utilitaire pour convertir NodeList en tableau si nécessaire
+	const musicItemsArray = Array.from(musicItems);
+
+	// Cibler tous les boutons "Tout lire"
+	const playAllButtons = document.querySelectorAll('.play-all-btn');
+
+	playAllButtons.forEach(button => {
+		button.addEventListener('click', (e) => {
+			e.stopPropagation();
+
+			// Trouver la liste associée au bouton
+			const listContainer = button.closest('.music-list');
+			const musicList = Array.from(listContainer.querySelectorAll('.music-item'));
+			if (musicList.length > 0) {
+				playMusicListSequentially(0, musicList);
+			}
+		});
+	});
+	
+	
 	
 	// Événement au clic sur le bouton Paroles
 	lyricsBtn.addEventListener('click', toggleLyricsView);

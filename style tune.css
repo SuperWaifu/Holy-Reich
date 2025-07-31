@@ -205,10 +205,27 @@ input[type="range"] {
 
 /* Titre de chaque liste */
 .list-title {
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-size: 24px;
     font-weight: bold;
     margin: 0;
     color: #ffffff;
+}
+
+.play-all-btn {
+    font-size: 14px;
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.play-all-btn:hover {
+    background-color: #555;
 }
 
 /* Conteneur des musiques dans chaque liste */
