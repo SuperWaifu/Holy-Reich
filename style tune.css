@@ -214,7 +214,12 @@ input[type="range"] {
     color: #ffffff;
 }
 
-.play-all-btn {
+.list-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.play-all-btn, .shuffle-btn {
     font-size: 14px;
     background-color: #333;
     color: white;
@@ -227,8 +232,11 @@ input[type="range"] {
 .play-all-btn:hover {
     background-color: #555;
 }
+.shuffle-btn:hover {
+    background-color: #555;
+}
 
-.play-all-btn.active {
+.play-all-btn.active, .shuffle-btn.active {
     background-color: #EDB71C;
     color: white;
     font-weight: bold;

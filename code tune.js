@@ -181,24 +181,26 @@ document.addEventListener('DOMContentLoaded', () => {
 	let sequentialPlayActive = false;
 	let sequentialPlayList = [];
 	let sequentialTimeout = null;
+	let isShuffleMode = false;
 	
 	// Véritable fonction
-	function playMusicListSequentially(startIndex, musicList) {
+	function playMusicListSequentially(startIndex, musicList, shuffle = false) {
 		stopAllMusic();
 		sequentialPlayActive = true;
-		sequentialPlayList = musicList;
+		isShuffleMode = shuffle;
+		sequentialPlayList = shuffle ? shuffleArray(musicList) : musicList;
 
 		// Met à jour l'état visuel du bouton actif
-		updatePlayAllButtonsState(musicList, true);
+		updatePlayAllButtonsState(sequentialPlayList, true, shuffle);
 
 		function playNext(index) {
-			if (!sequentialPlayActive || index >= musicList.length) {
-				updatePlayAllButtonsState(musicList, false);
+			if (!sequentialPlayActive || index >= sequentialPlayList.length) {
+				updatePlayAllButtonsState(sequentialPlayList, false, false);
 				sequentialPlayActive = false;
 				return;
 			}
 
-			const item = musicList[index];
+			const item = sequentialPlayList[index];
 			const musicTitle = item.getAttribute('data-title');
 			const musicArtist = item.getAttribute('data-artist');
 			const musicCover = item.getAttribute('data-cover');
@@ -216,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			};
 		}
 
-		playNext(startIndex);
+		playNext(0);
 	}
 
 	// Utilitaire pour convertir NodeList en tableau si nécessaire
@@ -238,10 +240,24 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	});
 	
+	//Cibler tous les boutons "Aléatoire"
+	const shuffleButtons = document.querySelectorAll('.shuffle-btn');
+
+	shuffleButtons.forEach(button => {
+		button.addEventListener('click', (e) => {
+			e.stopPropagation();
+			const listContainer = button.closest('.music-list');
+			const musicList = Array.from(listContainer.querySelectorAll('.music-item'));
+			if (musicList.length > 0) {
+				playMusicListSequentially(0, musicList, true);
+			}
+		});
+	});
+	
 	// Afficher le statut actif du bouton
-	function updatePlayAllButtonsState(musicList, isActive) {
+	function updatePlayAllButtonsState(musicList, isActive, shuffleMode = false) {
 		// Désactiver tous les boutons "Tout lire"
-		document.querySelectorAll('.play-all-btn').forEach(btn => {
+		document.querySelectorAll('.play-all-btn, .shuffle-btn').forEach(btn => {
 			btn.classList.remove('active');
 		});
 
@@ -251,10 +267,24 @@ document.addEventListener('DOMContentLoaded', () => {
 			if (!parentList) return;
 
 			const playBtn = parentList.querySelector('.play-all-btn');
-			if (playBtn) {
+			const shuffleBtn = parentList.querySelector('.shuffle-btn');
+
+			if (shuffleMode && shuffleBtn) {
+				shuffleBtn.classList.add('active');
+			} else if (playBtn) {
 				playBtn.classList.add('active');
 			}
 		}
+	}
+	
+	// Mélange des musiques
+	function shuffleArray(array) {
+		const shuffled = array.slice(); // Copie
+		for (let i = shuffled.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+		}
+		return shuffled;
 	}
 	
 	
