@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const lyricsText = document.getElementById('lyrics-text');
     const lyricsTitle = document.getElementById('lyrics-title');
 
+	const timestamp = document.querySelector('.timestamp');
+
     let currentAudioPlayer = null; // Référence de l'audio actuellement en lecture
     let currentMusicTitle = '';
     let currentMusicArtist = '';
@@ -102,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+
    // Mettre à jour la barre de progression selon le temps de la musique
     audioPlayers.forEach(audio => {
         audio.addEventListener('timeupdate', () => {
@@ -114,6 +117,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Mettre à jour la couleur de la barre de progression avec la partie lue
                 updateProgressBar(progress);
+				const currentMinutes = Math.floor(audio.currentTime / 60);
+				const currentSeconds = Math.floor(audio.currentTime % 60).toString().padStart(2, '0');
+				const totalMinutes = Math.floor(audio.duration / 60);
+				const totalSeconds = Math.floor(audio.duration % 60).toString().padStart(2, '0');
+
+				timestamp.textContent = `${currentMinutes}:${currentSeconds} / ${totalMinutes}:${totalSeconds}`;
             }
         });
     });
@@ -156,6 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (audio === currentAudioPlayer) {
                 playIcon.src = 'logo/play.png';
                 progressBar.value = 0;
+				timestamp.textContent = `0:00 / ${Math.floor(audio.duration / 60)}:${Math.floor(audio.duration % 60).toString().padStart(2, '0')}`;
             }
         });
     });
