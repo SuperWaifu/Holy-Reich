@@ -146,16 +146,21 @@ nav li a:hover .NAV-index {
   margin: 50px auto; /* Ajoute un espace autour pour éviter tout chevauchement */
 }
 
-.app-container {
-  flex: 1; /* Permet à l'espace entre le bord et le logo de s'adapter */
-  display: flex;
-  justify-content: flex-end; /* Place le logo du côté droit de son espace */
-}
-
-.app-container {
+.app-container.left {
   position: absolute; /* Permet de positionner le logo indépendamment du flux Flexbox */
   left: 10%; /* Positionne le logo à gauche du conteneur centré */
+  flex: 1; /* Permet à l'espace entre le bord et le logo de s'adapter */
+  display: flex;
+  justify-content: flex-start; /* Place le logo du côté droit de son espace */
 }
+.app-container.right {
+  position: absolute;
+  right: 10%;
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
 
 .app {
   max-width: 100px; /* Ajuste la taille du logo */
@@ -163,10 +168,12 @@ nav li a:hover .NAV-index {
   transition: transform 0.70s ease-in-out; /* Ajoute des animations */
 }
 
-.app:hover {
-  transform: rotate(360deg); /* Fait tourner le logo d'un tour complet */
+.rotate-cw:hover {
+  transform: rotate(360deg);
 }
-
+.rotate-ccw:hover {
+  transform: rotate(-360deg);
+}
 
 .decor img {
   max-width: 750px; /* Ajuste la taille du drapeau */
