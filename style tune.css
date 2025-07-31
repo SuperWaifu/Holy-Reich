@@ -228,6 +228,12 @@ input[type="range"] {
     background-color: #555;
 }
 
+.play-all-btn.active {
+    background-color: #EDB71C;
+    color: white;
+    font-weight: bold;
+}
+
 /* Conteneur des musiques dans chaque liste */
 .music-items-container {
     display: flex; /* Affiche les musiques horizontalement */

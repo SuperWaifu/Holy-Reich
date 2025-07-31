@@ -92,6 +92,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Démarrer la lecture de la musique sélectionnée
             togglePlayPause(currentAudioPlayer);
+			
+			// Si on clique une musique hors de la lecture en série, on annule le mode
+			if (sequentialPlayActive && !sequentialPlayList.includes(item)) {
+				sequentialPlayActive = false;
+				updatePlayAllButtonsState(sequentialPlayList, false);
+			}
         });
     });
 
@@ -171,13 +177,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 	
 	
-	
 	// Fonction pour lire les musiques d'une section à la suite
+	let sequentialPlayActive = false;
+	let sequentialPlayList = [];
+	let sequentialTimeout = null;
+	
+	// Véritable fonction
 	function playMusicListSequentially(startIndex, musicList) {
 		stopAllMusic();
+		sequentialPlayActive = true;
+		sequentialPlayList = musicList;
+
+		// Met à jour l'état visuel du bouton actif
+		updatePlayAllButtonsState(musicList, true);
 
 		function playNext(index) {
-			if (index >= musicList.length) return;
+			if (!sequentialPlayActive || index >= musicList.length) {
+				updatePlayAllButtonsState(musicList, false);
+				sequentialPlayActive = false;
+				return;
+			}
 
 			const item = musicList[index];
 			const musicTitle = item.getAttribute('data-title');
@@ -218,6 +237,25 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 		});
 	});
+	
+	// Afficher le statut actif du bouton
+	function updatePlayAllButtonsState(musicList, isActive) {
+		// Désactiver tous les boutons "Tout lire"
+		document.querySelectorAll('.play-all-btn').forEach(btn => {
+			btn.classList.remove('active');
+		});
+
+		// Activer le bouton de la section concernée, si demandé
+		if (isActive) {
+			const parentList = musicList[0]?.closest('.music-list');
+			if (!parentList) return;
+
+			const playBtn = parentList.querySelector('.play-all-btn');
+			if (playBtn) {
+				playBtn.classList.add('active');
+			}
+		}
+	}
 	
 	
 	
