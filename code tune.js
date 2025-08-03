@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fonction pour gérer la lecture/pause de la musique
     function togglePlayPause(audio) {
         if (audio.paused) {
+			audio.volume = globalVolume;
             audio.play();
             playIcon.src = "logo/pause.png";
         } else {
@@ -89,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const musicArtist = item.getAttribute('data-artist');
 			const musicCover = item.getAttribute('data-cover');
             updateMusicInfo(musicTitle, musicArtist, musicCover);
+			currentAudioPlayer.volume = globalVolume;
 
             // Démarrer la lecture de la musique sélectionnée
             togglePlayPause(currentAudioPlayer);
@@ -156,14 +158,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialiser la barre avec une couleur par défaut à 0% de progression
     updateProgressBar(0);
 
-    // Gestion du volume de la musique
-    if (volumeControl) {
-        volumeControl.addEventListener('input', (event) => {
-            if (currentAudioPlayer) {
-                currentAudioPlayer.volume = event.target.value / 100;
-            }
-        });
-    }
 
     // Remettre le bouton de lecture/pause à l'état initial quand la musique est terminée
     audioPlayers.forEach(audio => {
@@ -175,6 +169,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+	
+	
+	let globalVolume = 0.5; // Valeur par défaut à 50 %
+    // Lors du réglage du volume :
+	if (volumeControl) {
+		volumeControl.addEventListener('input', (event) => {
+			globalVolume = event.target.value / 100;
+			if (currentAudioPlayer) {
+				currentAudioPlayer.volume = globalVolume;
+			}
+		});
+	}
 	
 	
 	// Fonction pour lire les musiques d'une section à la suite
@@ -209,8 +215,24 @@ document.addEventListener('DOMContentLoaded', () => {
 			if (!audio) return;
 
 			updateMusicInfo(musicTitle, musicArtist, musicCover);
+			// Mettre à jour le texte de la prochaine musique
+			const nextItem = sequentialPlayList[index + 1];
+			if (nextItem) {
+				const nextTitle = nextItem.getAttribute('data-title');
+				const nextArtist = nextItem.getAttribute('data-artist');
+				const scrollText = document.getElementById('scrolling-text');
+				if (scrollText) {
+					scrollText.textContent = `Prochaine musique : "${nextTitle}" par "${nextArtist}"`;
+				}
+			} else {
+				const scrollText = document.getElementById('scrolling-text');
+				if (scrollText) {
+					scrollText.textContent = "Fin de la playlist.";
+				}
+			}
 			playIcon.src = "logo/pause.png";
 			currentAudioPlayer = audio;
+			currentAudioPlayer.volume = globalVolume;
 			audio.play();
 
 			audio.onended = () => {

@@ -51,14 +51,64 @@ body {
 #current-music-info {
     width: 25%;
     background: #333;
-    padding: 20px;
-    overflow-y: auto;
+    padding: 0px;
+    overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	position: relative;
 }
 
 #album-cover {
     width: 100%;
     border-radius: 10px;
+	margin: 10;
 }
+
+#main-music-title, #main-music-artist {
+    margin: 0;
+    padding: 10px;
+    color: white;
+}
+
+/* Barre défilante de prochaine musique */
+#next-music-banner {
+    height: 40px;
+    background-color: #111;
+    border-top: 1px solid #444;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-left: 10px;
+}
+
+#scrolling-text {
+    white-space: nowrap;
+    padding-left: 100%;
+    display: inline-block;
+    animation: scroll-text 17s linear infinite;
+    color: #ccc;
+    font-size: 14px;
+	font-family:Times New Roman;
+}
+
+#scrolling-text:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scroll-text {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
 
 /* Section principale */
 #center-section {
@@ -210,8 +260,14 @@ input[type="range"] {
     align-items: center;
     font-size: 24px;
     font-weight: bold;
-    margin: 0;
+    margin: 0 0 10px 0;
     color: #ffffff;
+	padding: 0 10px;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px; /* Espacement entre les boutons */
 }
 
 .list-buttons {
@@ -296,6 +352,41 @@ input[type="range"] {
 .hidden {
     display: none;
 }
+
+
+/* Volume */
+#volume-control {
+    -webkit-appearance: none;
+    width: 150px;
+    height: 6px;
+    background: #555;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#volume-control::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #EDB71C;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 0 2px rgba(0,0,0,0.5);
+}
+
+#volume-control::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #EDB71C;
+    cursor: pointer;
+    border: none;
+}
+
 
 /* Vue des paroles */
 #lyrics-view {
