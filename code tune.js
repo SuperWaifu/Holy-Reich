@@ -211,63 +211,62 @@ document.addEventListener('DOMContentLoaded', () => {
 	let sequentialPlayList = [];
 	let sequentialTimeout = null;
 	let isShuffleMode = false;
+	let currentSequentialIndex = 0;
 	
-	// Véritable fonction
-	function playMusicListSequentially(startIndex, musicList, shuffle = false) {
-		stopAllMusic();
-		sequentialPlayActive = true;
-		isShuffleMode = shuffle;
-		sequentialPlayList = shuffle ? shuffleArray(musicList) : musicList;
+	function playNext(index) {
+		if (!sequentialPlayActive || index >= sequentialPlayList.length) {
+			updatePlayAllButtonsState(sequentialPlayList, false, false);
+			sequentialPlayActive = false;
+			stopLogoSpin();
+			return;
+		}
 
-		// Met à jour l'état visuel du bouton actif
-		updatePlayAllButtonsState(sequentialPlayList, true, shuffle);
+		currentSequentialIndex = index;
+		const item = sequentialPlayList[index];
+		const musicTitle = item.getAttribute('data-title');
+		const musicArtist = item.getAttribute('data-artist');
+		const musicCover = item.getAttribute('data-cover');
+		const audio = audioPlayers[musicItems.indexOf(item)];
 
-		function playNext(index) {
-			if (!sequentialPlayActive || index >= sequentialPlayList.length) {
-				updatePlayAllButtonsState(sequentialPlayList, false, false);
-				sequentialPlayActive = false;
-				return;
-			}
+		if (!audio) return;
 
-			const item = sequentialPlayList[index];
-			const musicTitle = item.getAttribute('data-title');
-			const musicArtist = item.getAttribute('data-artist');
-			const musicCover = item.getAttribute('data-cover');
-			const audio = audioPlayers[musicItems.indexOf(item)];
+		updateMusicInfo(musicTitle, musicArtist, musicCover);
 
-			if (!audio) return;
-
-			updateMusicInfo(musicTitle, musicArtist, musicCover);
-			// Mettre à jour le texte de la prochaine musique
-			const nextItem = sequentialPlayList[index + 1];
+		// Met à jour la prochaine musique dans la bande
+		const nextItem = sequentialPlayList[index + 1];
+		const scrollText = document.getElementById('scrolling-text');
+		if (scrollText) {
 			if (nextItem) {
 				const nextTitle = nextItem.getAttribute('data-title');
 				const nextArtist = nextItem.getAttribute('data-artist');
-				const scrollText = document.getElementById('scrolling-text');
-				if (scrollText) {
-					scrollText.textContent = `Prochaine musique : "${nextTitle}" par "${nextArtist}"`;
-				}
+				scrollText.textContent = `Prochaine musique : "${nextTitle}" par "${nextArtist}"`;
 			} else {
-				const scrollText = document.getElementById('scrolling-text');
-				if (scrollText) {
-					scrollText.textContent = "Fin de la playlist.";
-				}
+				scrollText.textContent = "Fin de la playlist.";
 			}
-			playIcon.src = "logo/pause.png";
-			currentAudioPlayer = audio;
-			currentAudioPlayer.volume = globalVolume;
-			audio.play();
-			startLogoSpin();
-
-			audio.onended = () => {
-				if (index + 1 >= sequentialPlayList.length) {
-					stopLogoSpin();
-				}
-				playNext(index + 1);
-			};
 		}
 
-		playNext(0);
+		playIcon.src = "logo/pause.png";
+		currentAudioPlayer = audio;
+		currentAudioPlayer.volume = globalVolume;
+		audio.play();
+		startLogoSpin();
+
+		audio.onended = () => {
+			if (index + 1 >= sequentialPlayList.length) stopLogoSpin();
+			playNext(index + 1);
+		};
+	}
+	
+	// Véritable fonction
+	function playMusicListSequentially(startIndex, musicList, shuffle = false) {
+	stopAllMusic();
+	sequentialPlayActive = true;
+	isShuffleMode = shuffle;
+	sequentialPlayList = shuffle ? shuffleArray(musicList) : musicList;
+
+	updatePlayAllButtonsState(sequentialPlayList, true, shuffle);
+
+	playNext(startIndex);
 	}
 
 	// Utilitaire pour convertir NodeList en tableau si nécessaire
@@ -337,6 +336,19 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 	
 	
+	const nextButton = document.getElementById('next-btn');
+
+	nextButton.addEventListener('click', () => {
+		if (!currentAudioPlayer || !sequentialPlayActive) return;
+
+		if (currentSequentialIndex < sequentialPlayList.length - 1) {
+			currentAudioPlayer.pause();
+			currentAudioPlayer.currentTime = 0;
+			playNext(currentSequentialIndex + 1);
+		}
+	});
+	
+	
 	
 	// Événement au clic sur le bouton Paroles
 	lyricsBtn.addEventListener('click', toggleLyricsView);
@@ -376,5 +388,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		"Hymne de New-Ark": "<strong>Couplet 1 :</strong><br>Au milieu des dunes et des tempêtes,<br>New Ark se dresse, en ordre parfait.<br>Sous le soleil brûlant, nos armes levées,<br>Dans ce désert, notre puissance forgée.<br><br><strong>Refrain :</strong><br>New Ark, notre bastion,<br>Unis sous le ciel de la nation.<br>Guidés par la Leader Suprême,<br>Nous sommes les flammes, l'élite suprême.<br><br><strong>Couplet 2 :</strong><br>Des nomades et brigands, soldats de fer,<br>Pour conquérir, pour un nouvel ère.<br>Dans les sables mouvants, notre discipline,<br>Est une forteresse, notre ligne de front ultime.<br><br><strong>[Refrain]</strong><br><br><strong>Pont :</strong><br>Quand l'espoir semble s'éteindre,<br>Nos cœurs continuent de se joindre.<br>Dans chaque battement, dans chaque marche,<br>La force de New Ark se déclare.<br><br><strong>[Refrain]</strong><br><br><strong>Outro :</strong><br>Pour chaque grain de sable, chaque combat,<br>Nous marchons ensemble, droit et sans trêve.<br>New Ark brille, en ordre et en force,<br>Sous la bannière de notre emblème.",
 		"Les échos de Melynas": "<strong>Couplet 1 :</strong><br>Dans les brumes du grand lac,<br>Où dansent les feux follets,<br>Sous le ciel de Melynas,<br>Nos chants jamais ne cesseront.<br>Du narval nous fêtons la course,<br>Le temps des récoltes est venu,<br>Avec nos mains qui forgent la terre,<br>Nous bâtirons un avenir fort.<br><br><strong>Refrain :</strong><br>Mais l'hermine court encore,<br>Sur les terres de Melynas,<br>Le vent portera nos efforts,<br>Et nos cœurs, jamais las.<br><br><strong>Couplet 2 :</strong><br>Là-bas, aux frontières lointaines,<br>Les ombres de l’ennemi grandissent,<br>Mais ici, nos foyers s’embrasent,<br>De courage, que rien ne ternisse.<br>Pour chaque pierre que l'on soulève,<br>C'est notre honneur qui se dresse,<br>Face aux vents qui menacent nos rêves,<br>Nous serons l'arme et la promesse.<br><br><strong>[Refrain]</strong><br><br><strong>Couplet 3 :</strong><br>Qu'importe les orages qui grondent,<br>Sur la lisière de nos champs,<br>Ici se lèvent nos frères et sœurs,<br>Gardant vivants nos vieux chants.<br>Par nos traditions, nos fêtes, nos mains,<br>Melynas restera debout,<br>Et s’il le faut, sur ces chemins,<br>Nous défendrons tout ce qui est nous.<br><br><strong>[Refrain]</strong><br><br><strong>Couplet 4 :</strong><br>Lorsque l’appel résonnera,<br>Pour protéger notre héritage,<br>Nous serons mille, nous serons là,<br>Fiers de notre enracinage.<br>Dans chaque souffle et chaque cri,<br>S'élève l'âme de nos montagnes,<br>Et si l'ennemi venait ici,<br>Nous serons l'épée, le bouclier, la flamme.<br><br><strong>[Refrain]</strong>",
 		"Hymne du GWE": "<strong>Couplet I :</strong><br>Sous les fastes du ciel boréal,<br>Là où l’écume embrasse la pierre,<br>Se dresse, auguste et sans égale,<br>Notre Empire, dans son mystère.<br>Point ne quérons la main d’autrui,<br>Car tout honneur nous vient du sol,<br>Et c’est la paix, d’airain vêtue,<br>Que nous tissons, loin des paroles.<br><br><strong>Refrain :</strong><br>Ô Bastille, gardienne fière,<br>Toi qui trônes aux vents altiers,<br>Chante encore, vaste lumière,<br>L’âme close de nos sentiers.<br>Par le roc et par le silence,<br>Le G.W.E. (G d'vé E) forge sa défense.<br><br><strong>Couplet II :</strong><br>Nos monts veillent, drapés d’orgueil,<br>Et les forêts, d’un pas feutré,<br>Murmurent l’antique accueil<br>Des cœurs paisibles et sacrés.<br>De l’émeraude aux veines du cuivre,<br>Chaque éclat scelle notre loi :<br>Nul ne saura nous faire vivre<br>Sous d’autres cieux, d’autres toits.<br><br><strong>[Refrain]</strong><br><br><strong>Pont :</strong><br>Nous n’ouvrons point nos portes d’or,<br>Mais nul ne franchit nos frontières ;<br>Ce que l’on croit désert dehors<br>Est flamme au cœur de nos pierres.<br><br><strong>Refrain final :</strong><br>Ô Bastille, flamme éternelle,<br>Tu nous lies à l’horizon,<br>Ton nom sonne, doux rituel,<br>À l’aube, au soir, à l’unisson.<br>Sous ton regard, rien ne chancelle :<br>Great West Empire, noble bastion.",
+		"Où vais-je ?": "<strong>Couplet 1 :</strong><br>Je marche dans des rues sans nom<br>Les lampadaires brillent, mais je vois pas l’horizon<br>Des papiers, des chiffres, des voix qui m’ignorent<br>Des regards pressés qui fuient quand je m’endors<br><br><strong>Couplet 2 :</strong><br>On me parle d’avenir, de chemin tout tracé<br>Mais j’vois que des murs et des portes fermées<br>On m’a dit “avance”, sans me tendre la main<br>On m’a laissé là, au bord du matin<br><br><strong>Pré-refrain :</strong><br>Et j’ai crié, sans que personne n’écoute<br>Dans ce silence, j’ai perdu la route<br><br><strong>Refrain :</strong><br>Où vais-je, si personne ne me voit ?<br>Si même la lumière oublie ma voix ?<br>Je veux des bras, pas des formulaires<br>Des cœurs ouverts, pas des commentaires<br><br><strong>Pont :</strong><br>Ils parlent de moi comme d’un dossier à gérer<br>Mais jamais d’amour, jamais de vérité<br><br><strong>Pont :</strong><br>Et pendant qu’ils signent, moi j’oublie qui je suis<br>Une enfant, une âme, qu’on abandonne ici<br><br><strong>Refrain final :</strong><br>Où vais-je, si personne ne m’attend ?<br>Si les adultes dorment en ignorant le vent ?<br>Je suis là, je vis, je ressens encore<br>Mais le monde moderne oublie mon corps<br><br><strong>Outro :</strong><br>Alors j’écris sur les murs de ma nuit<br>Pour que demain, on m’écoute… aussi",
 	};
 });
