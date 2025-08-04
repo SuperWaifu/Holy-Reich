@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function stopAllMusic() {
         audioPlayers.forEach(audio => {
             audio.pause();
+			stopLogoSpin();
             audio.currentTime = 0; // Réinitialiser la lecture au début
         });
     }
@@ -67,12 +68,29 @@ document.addEventListener('DOMContentLoaded', () => {
         if (audio.paused) {
 			audio.volume = globalVolume;
             audio.play();
+			startLogoSpin();
             playIcon.src = "logo/pause.png";
         } else {
             audio.pause();
+			stopLogoSpin();
             playIcon.src = "logo/play.png";
         }
     }
+
+	// Logo qui spin
+	stopLogoSpin(); // le logo est figé par défaut
+	function startLogoSpin() {
+		const logo = document.getElementById('logo-spinner');
+		if (logo) {
+			logo.style.animationPlayState = 'running';
+		}
+	}
+	function stopLogoSpin() {
+		const logo = document.getElementById('logo-spinner');
+		if (logo) {
+			logo.style.animationPlayState = 'paused';
+		}
+	}
 
     // Ajoute un événement de clic sur chaque conteneur de musique
     musicItems.forEach((item, index) => {
@@ -94,6 +112,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Démarrer la lecture de la musique sélectionnée
             togglePlayPause(currentAudioPlayer);
+			
+			 // Gérer la rotation à la fin
+			currentAudioPlayer.onended = () => {
+				stopLogoSpin();
+			};
 			
 			// Si on clique une musique hors de la lecture en série, on annule le mode
 			if (sequentialPlayActive && !sequentialPlayList.includes(item)) {
@@ -234,8 +257,12 @@ document.addEventListener('DOMContentLoaded', () => {
 			currentAudioPlayer = audio;
 			currentAudioPlayer.volume = globalVolume;
 			audio.play();
+			startLogoSpin();
 
 			audio.onended = () => {
+				if (index + 1 >= sequentialPlayList.length) {
+					stopLogoSpin();
+				}
 				playNext(index + 1);
 			};
 		}

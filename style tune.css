@@ -71,6 +71,40 @@ body {
     color: white;
 }
 
+/* Logo qui spin */
+#logo-spinner-container {
+    position: absolute;
+    bottom: 40px; /* hauteur de la barre */
+    left: 0;
+    right: 0;
+    top: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1; /* Derrière la barre */
+}
+
+#logo-spinner {
+    max-height: 200px; /* taille maximale */
+    width: auto;
+    opacity: 0.05; /* très discret */
+    animation: spin 8s linear infinite;
+    transform-origin: center;
+    transition: opacity 0.5s ease;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
 /* Barre défilante de prochaine musique */
 #next-music-banner {
     height: 40px;
@@ -84,6 +118,7 @@ body {
     left: 0;
     right: 0;
     padding-left: 10px;
+	z-index: 2;
 }
 
 #scrolling-text {
@@ -142,6 +177,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
+	z-index: 5;
 }
 
 /* Style général de la barre de progression */
