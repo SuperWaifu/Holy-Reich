@@ -57,6 +57,7 @@ h7 {
     font-size: 25px;
     text-align: left;
     line-height: 120%;
+	flex-direction: column;
 }
 
 h9 {
@@ -85,7 +86,7 @@ h9 a {
 
 h10 a {
     color: darkblue; /* Définir la couleur de base des liens */
-    text-decoration: none; /* Supprimer le soulignement des liens, optionnel */
+    text-decoration: none; /* Supprimer le soulignement des liens, optionnel */	
 }
 
 h10 a:visited {
