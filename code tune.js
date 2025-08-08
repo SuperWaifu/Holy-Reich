@@ -3,350 +3,343 @@ document.addEventListener('DOMContentLoaded', () => {
     const progressBar = document.getElementById('progress-bar');
     const volumeControl = document.getElementById('volume-control');
 
-    // Sélection des éléments pour le titre et l'auteur dans la barre de lecture
-    const playerTitle = document.getElementById('player-title'); 
-    const playerArtist = document.getElementById('player-artist'); 
+    const playerTitle = document.getElementById('player-title');
+    const playerArtist = document.getElementById('player-artist');
 
-    // Sélection des éléments pour le titre et l'auteur dans la section centrale
-    const mainMusicTitle = document.getElementById('main-music-title'); 
-    const mainMusicArtist = document.getElementById('main-music-artist'); 
+    const mainMusicTitle = document.getElementById('main-music-title');
+    const mainMusicArtist = document.getElementById('main-music-artist');
+
+    const timestamp = document.querySelector('.timestamp');
+    const playerCover = document.getElementById('player-cover');
+    const mainMusicCover = document.getElementById('album-cover');
 
 	const lyricsBtn = document.getElementById('lyrics-btn');
     const classicView = document.getElementById('classic-view');
     const lyricsView = document.getElementById('lyrics-view');
     const lyricsText = document.getElementById('lyrics-text');
     const lyricsTitle = document.getElementById('lyrics-title');
-
-	const timestamp = document.querySelector('.timestamp');
-
-    let currentAudioPlayer = null; // Référence de l'audio actuellement en lecture
-    let currentMusicTitle = '';
-    let currentMusicArtist = '';
-
-    // Sélection de tous les conteneurs de musiques et des éléments audio
+    // éléments
     const musicItems = Array.from(document.querySelectorAll('.music-item'));
-    const audioPlayers = document.querySelectorAll('audio');
-	
-	const playerCover = document.getElementById('player-cover'); // Cover dans la barre du bas
-	const mainMusicCover = document.getElementById('album-cover'); // Cover dans la section centrale
+    const audioPlayers = Array.from(document.querySelectorAll('audio')); // converti en array pour indexOf
 
-    // Vérification si des musiques sont présentes dans la page
     if (musicItems.length === 0 || audioPlayers.length === 0) {
         console.warn("Aucune musique disponible dans la page.");
         return;
     }
 
-    // Fonction pour arrêter toute musique en cours
+    // état global
+    let currentAudioPlayer = null;
+    let currentMusicTitle = '';
+    let currentMusicArtist = '';
+    let globalVolume = 0.5;
+
+    // playlist / séquence
+    let sequentialPlayActive = false;
+    let sequentialPlayList = []; // playlist courante (ordonnée ou mélangée)
+    let isShuffleMode = false;
+    let currentSequentialIndex = -1;
+
+    // prev longpress
+    const longPressDuration = 500;
+    let prevButtonPressTimer = null;
+    let longClickTriggered = false;
+
+    // ---------- utilitaires ----------
     function stopAllMusic() {
-        audioPlayers.forEach(audio => {
-            audio.pause();
-			stopLogoSpin();
-            audio.currentTime = 0; // Réinitialiser la lecture au début
-        });
+        audioPlayers.forEach(a => { a.pause(); a.currentTime = 0; });
+        stopLogoSpin();
     }
 
-    // Fonction pour mettre à jour les informations de la musique dans toute la page
     function updateMusicInfo(title, artist, cover) {
-        currentMusicTitle = title;
-        currentMusicArtist = artist;
-
-        // Mise à jour des informations dans la barre de lecture
-        playerTitle.textContent = currentMusicTitle;
-        playerArtist.textContent = currentMusicArtist;
-
-        // Mise à jour des informations dans la section centrale
-        mainMusicTitle.textContent = currentMusicTitle;
-        mainMusicArtist.textContent = currentMusicArtist;
-		
-		// Mettre à jour les covers
-		playerCover.src = cover; // Image de la barre du bas
-		mainMusicCover.src = cover; // Image de la section centrale
-    }
-
-    // Fonction pour gérer la lecture/pause de la musique
-    function togglePlayPause(audio) {
-        if (audio.paused) {
-			audio.volume = globalVolume;
-            audio.play();
-			startLogoSpin();
-            playIcon.src = "logo/pause.png";
-        } else {
-            audio.pause();
-			stopLogoSpin();
-            playIcon.src = "logo/play.png";
+        if (title !== undefined) {
+            playerTitle.textContent = title;
+            mainMusicTitle.textContent = title;
+        }
+        if (artist !== undefined) {
+            playerArtist.textContent = artist;
+            mainMusicArtist.textContent = artist;
+        }
+        if (cover) {
+            if (playerCover) playerCover.src = cover;
+            if (mainMusicCover) mainMusicCover.src = cover;
         }
     }
 
-	// Logo qui spin
-	stopLogoSpin(); // le logo est figé par défaut
-	function startLogoSpin() {
-		const logo = document.getElementById('logo-spinner');
-		if (logo) {
-			logo.style.animationPlayState = 'running';
-		}
-	}
-	function stopLogoSpin() {
-		const logo = document.getElementById('logo-spinner');
-		if (logo) {
-			logo.style.animationPlayState = 'paused';
-		}
-	}
+    function togglePlayPause(audio) {
+        if (!audio) return;
+        if (audio.paused) {
+            audio.volume = globalVolume;
+            audio.play();
+            startLogoSpin();
+            if (playIcon) playIcon.src = "logo/pause.png";
+        } else {
+            audio.pause();
+            stopLogoSpin();
+            if (playIcon) playIcon.src = "logo/play.png";
+        }
+    }
 
-    // Ajoute un événement de clic sur chaque conteneur de musique
+    // logo spin (petites fonctions)
+    function startLogoSpin() {
+        const logo = document.getElementById('logo-spinner');
+        if (logo) logo.style.animationPlayState = 'running';
+    }
+    function stopLogoSpin() {
+        const logo = document.getElementById('logo-spinner');
+        if (logo) logo.style.animationPlayState = 'paused';
+    }
+    stopLogoSpin();
+
+    // ---------- interaction : clic sur une piste (lecture simple) ----------
     musicItems.forEach((item, index) => {
         item.addEventListener('click', () => {
-            console.log("Musique cliquée :", item);
+            // si on clique sur un item appartenant à la playlist en cours, joue via playNext
+            if (sequentialPlayActive && sequentialPlayList.includes(item)) {
+                const idxInSeq = sequentialPlayList.indexOf(item);
+                playNext(idxInSeq);
+                return;
+            }
 
-            // Arrêter toutes les musiques en cours
+            // lecture simple -> arrêter séquence et jouer cet item
             stopAllMusic();
+            sequentialPlayActive = false;
+            window.updatePlayAllButtonsState(sequentialPlayList, false); // mise à jour UI
 
-            // Sélectionner l'audio correspondant à ce conteneur
             currentAudioPlayer = audioPlayers[index];
-
-            // Mettre à jour les informations de la musique en cours
             const musicTitle = item.getAttribute('data-title');
             const musicArtist = item.getAttribute('data-artist');
-			const musicCover = item.getAttribute('data-cover');
+            const musicCover = item.getAttribute('data-cover');
             updateMusicInfo(musicTitle, musicArtist, musicCover);
-			currentAudioPlayer.volume = globalVolume;
 
-            // Démarrer la lecture de la musique sélectionnée
-            togglePlayPause(currentAudioPlayer);
-			
-			 // Gérer la rotation à la fin
-			currentAudioPlayer.onended = () => {
-				stopLogoSpin();
-			};
-			
-			// Si on clique une musique hors de la lecture en série, on annule le mode
-			if (sequentialPlayActive && !sequentialPlayList.includes(item)) {
-				sequentialPlayActive = false;
-				updatePlayAllButtonsState(sequentialPlayList, false);
-			}
+            currentAudioPlayer.volume = globalVolume;
+            currentAudioPlayer.play();
+            startLogoSpin();
+            if (playIcon) playIcon.src = "logo/pause.png";
+
+            currentAudioPlayer.onended = () => {
+                stopLogoSpin();
+                if (playIcon) playIcon.src = "logo/play.png";
+            };
         });
     });
 
-    // Ajoute l'événement de lecture/pause sur le bouton de la barre de lecture
-    playIcon.addEventListener('click', () => {
-        if (currentAudioPlayer) {
-            togglePlayPause(currentAudioPlayer);
-        } else {
-            console.warn("Aucune musique n'a été sélectionnée pour la lecture.");
-        }
-    });
-
-
-   // Mettre à jour la barre de progression selon le temps de la musique
+    // ---------- progress & time ----------
     audioPlayers.forEach(audio => {
         audio.addEventListener('timeupdate', () => {
-            if (audio === currentAudioPlayer) {
+            if (audio === currentAudioPlayer && audio.duration) {
                 const progress = (audio.currentTime / audio.duration) * 100;
-                progressBar.value = progress;
-
-                // Vérifier que le calcul de la progression est correct
-                console.log(`Progression : ${progress}%`);
-
-                // Mettre à jour la couleur de la barre de progression avec la partie lue
+                if (progressBar) progressBar.value = progress;
                 updateProgressBar(progress);
-				const currentMinutes = Math.floor(audio.currentTime / 60);
-				const currentSeconds = Math.floor(audio.currentTime % 60).toString().padStart(2, '0');
-				const totalMinutes = Math.floor(audio.duration / 60);
-				const totalSeconds = Math.floor(audio.duration % 60).toString().padStart(2, '0');
 
-				timestamp.textContent = `${currentMinutes}:${currentSeconds} / ${totalMinutes}:${totalSeconds}`;
+                const currentMinutes = Math.floor(audio.currentTime / 60);
+                const currentSeconds = Math.floor(audio.currentTime % 60).toString().padStart(2, '0');
+                const totalMinutes = Math.floor(audio.duration / 60);
+                const totalSeconds = Math.floor(audio.duration % 60).toString().padStart(2, '0');
+                if (timestamp) timestamp.textContent = `${currentMinutes}:${currentSeconds} / ${totalMinutes}:${totalSeconds}`;
             }
         });
-    });
 
-    // Changer le temps de lecture quand on déplace le curseur de la barre de progression
-    progressBar.addEventListener('input', (event) => {
-        if (currentAudioPlayer) {
-            const newTime = (event.target.value / 100) * currentAudioPlayer.duration;
-            currentAudioPlayer.currentTime = newTime;
-
-            // Mettre à jour la couleur de la barre de progression même lors du déplacement manuel
-            const progress = (newTime / currentAudioPlayer.duration) * 100;
-            console.log(`Progression après déplacement : ${progress}%`);
-            updateProgressBar(progress);
-        }
-    });
-
-    // Fonction pour mettre à jour la couleur de la barre de progression
-    function updateProgressBar(progress) {
-        // Mettre à jour le `background` avec un gradient qui montre la partie lue et non lue
-        progressBar.style.background = `linear-gradient(to right, #621bc1 ${progress}%, #e0e0e0 ${progress}%)`;
-        console.log(`Mise à jour de la barre : ${progressBar.style.background}`);
-    }
-
-    // Initialiser la barre avec une couleur par défaut à 0% de progression
-    updateProgressBar(0);
-
-
-    // Remettre le bouton de lecture/pause à l'état initial quand la musique est terminée
-    audioPlayers.forEach(audio => {
         audio.addEventListener('ended', () => {
             if (audio === currentAudioPlayer) {
-                playIcon.src = 'logo/play.png';
-                progressBar.value = 0;
-				timestamp.textContent = `0:00 / ${Math.floor(audio.duration / 60)}:${Math.floor(audio.duration % 60).toString().padStart(2, '0')}`;
+                if (playIcon) playIcon.src = "logo/play.png";
+                if (progressBar) progressBar.value = 0;
+                stopLogoSpin();
             }
         });
     });
-	
-	
-	let globalVolume = 0.5; // Valeur par défaut à 50 %
-    // Lors du réglage du volume :
-	if (volumeControl) {
-		volumeControl.addEventListener('input', (event) => {
-			globalVolume = event.target.value / 100;
-			if (currentAudioPlayer) {
-				currentAudioPlayer.volume = globalVolume;
-			}
-		});
-	}
-	
-	
-	// Fonction pour lire les musiques d'une section à la suite
-	let sequentialPlayActive = false;
-	let sequentialPlayList = [];
-	let sequentialTimeout = null;
-	let isShuffleMode = false;
-	let currentSequentialIndex = 0;
-	
-	function playNext(index) {
-		if (!sequentialPlayActive || index >= sequentialPlayList.length) {
-			updatePlayAllButtonsState(sequentialPlayList, false, false);
-			sequentialPlayActive = false;
-			stopLogoSpin();
-			return;
-		}
 
-		currentSequentialIndex = index;
-		const item = sequentialPlayList[index];
-		const musicTitle = item.getAttribute('data-title');
-		const musicArtist = item.getAttribute('data-artist');
-		const musicCover = item.getAttribute('data-cover');
-		const audio = audioPlayers[musicItems.indexOf(item)];
+    if (progressBar) {
+        progressBar.addEventListener('input', (event) => {
+            if (currentAudioPlayer && currentAudioPlayer.duration) {
+                const newTime = (event.target.value / 100) * currentAudioPlayer.duration;
+                currentAudioPlayer.currentTime = newTime;
+                updateProgressBar((newTime / currentAudioPlayer.duration) * 100);
+            }
+        });
+    }
 
-		if (!audio) return;
+    function updateProgressBar(progress) {
+        if (progressBar) progressBar.style.background = `linear-gradient(to right, #621bc1 ${progress}%, #e0e0e0 ${progress}%)`;
+    }
+    updateProgressBar(0);
 
-		updateMusicInfo(musicTitle, musicArtist, musicCover);
+    if (volumeControl) {
+        volumeControl.addEventListener('input', (event) => {
+            globalVolume = event.target.value / 100;
+            if (currentAudioPlayer) currentAudioPlayer.volume = globalVolume;
+        });
+    }
 
-		// Met à jour la prochaine musique dans la bande
-		const nextItem = sequentialPlayList[index + 1];
-		const scrollText = document.getElementById('scrolling-text');
-		if (scrollText) {
-			if (nextItem) {
-				const nextTitle = nextItem.getAttribute('data-title');
-				const nextArtist = nextItem.getAttribute('data-artist');
-				scrollText.textContent = `Prochaine musique : "${nextTitle}" par "${nextArtist}"`;
-			} else {
-				scrollText.textContent = "Fin de la playlist.";
-			}
-		}
+    // ---------- playNext / playlist ----------
+    function playNext(index) {
+        if (!sequentialPlayActive || index < 0 || index >= sequentialPlayList.length) {
+            window.updatePlayAllButtonsState(sequentialPlayList, false, false);
+            sequentialPlayActive = false;
+            stopLogoSpin();
+            return;
+        }
 
-		playIcon.src = "logo/pause.png";
-		currentAudioPlayer = audio;
-		currentAudioPlayer.volume = globalVolume;
-		audio.play();
-		startLogoSpin();
+        currentSequentialIndex = index;
+        const item = sequentialPlayList[index];
+        const audioIdx = musicItems.indexOf(item);
+        if (audioIdx === -1) return;
+        const audio = audioPlayers[audioIdx];
 
-		audio.onended = () => {
-			if (index + 1 >= sequentialPlayList.length) stopLogoSpin();
-			playNext(index + 1);
-		};
-	}
-	
-	// Véritable fonction
-	function playMusicListSequentially(startIndex, musicList, shuffle = false) {
-	stopAllMusic();
-	sequentialPlayActive = true;
-	isShuffleMode = shuffle;
-	sequentialPlayList = shuffle ? shuffleArray(musicList) : musicList;
+        // stop other players
+        audioPlayers.forEach(a => { if (a !== audio) { a.pause(); a.currentTime = 0; } });
 
-	updatePlayAllButtonsState(sequentialPlayList, true, shuffle);
+        const musicTitle = item.getAttribute('data-title');
+        const musicArtist = item.getAttribute('data-artist');
+        const musicCover = item.getAttribute('data-cover');
+        updateMusicInfo(musicTitle, musicArtist, musicCover);
 
-	playNext(startIndex);
-	}
+        // mise à jour bannière prochain
+        const nextItem = sequentialPlayList[index + 1];
+        const scrollText = document.getElementById('scrolling-text');
+        if (scrollText) {
+            if (nextItem) {
+                scrollText.textContent = `Prochaine musique : "${nextItem.getAttribute('data-title')}" par "${nextItem.getAttribute('data-artist')}"`;
+            } else {
+                scrollText.textContent = "Fin de la playlist.";
+            }
+        }
 
-	// Utilitaire pour convertir NodeList en tableau si nécessaire
-	const musicItemsArray = Array.from(musicItems);
+        currentAudioPlayer = audio;
+        currentAudioPlayer.volume = globalVolume;
+        currentAudioPlayer.play();
+        startLogoSpin();
+        if (playIcon) playIcon.src = "logo/pause.png";
 
-	// Cibler tous les boutons "Tout lire"
-	const playAllButtons = document.querySelectorAll('.play-all-btn');
+        currentAudioPlayer.onended = () => {
+            if (index + 1 >= sequentialPlayList.length) stopLogoSpin();
+            playNext(index + 1);
+        };
+    }
 
-	playAllButtons.forEach(button => {
-		button.addEventListener('click', (e) => {
-			e.stopPropagation();
+    function playMusicListSequentially(startIndex, list, shuffle = false) {
+        sequentialPlayList = shuffle ? shuffleArray(list) : list.slice();
+        sequentialPlayActive = true;
+        isShuffleMode = shuffle;
+        currentSequentialIndex = startIndex;
+        window.updatePlayAllButtonsState(sequentialPlayList, true, shuffle);
+        playNext(startIndex);
+    }
 
-			// Trouver la liste associée au bouton
-			const listContainer = button.closest('.music-list');
-			const musicList = Array.from(listContainer.querySelectorAll('.music-item'));
-			if (musicList.length > 0) {
-				playMusicListSequentially(0, musicList);
-			}
-		});
-	});
-	
-	//Cibler tous les boutons "Aléatoire"
-	const shuffleButtons = document.querySelectorAll('.shuffle-btn');
+    // ---------- play all / shuffle buttons ----------
+    const playAllButtons = document.querySelectorAll('.play-all-btn');
+    playAllButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const listContainer = button.closest('.music-list');
+            const musicList = Array.from(listContainer.querySelectorAll('.music-item'));
+            if (musicList.length > 0) playMusicListSequentially(0, musicList, false);
+        });
+    });
 
-	shuffleButtons.forEach(button => {
-		button.addEventListener('click', (e) => {
-			e.stopPropagation();
-			const listContainer = button.closest('.music-list');
-			const musicList = Array.from(listContainer.querySelectorAll('.music-item'));
-			if (musicList.length > 0) {
-				playMusicListSequentially(0, musicList, true);
-			}
-		});
-	});
-	
-	// Afficher le statut actif du bouton
-	function updatePlayAllButtonsState(musicList, isActive, shuffleMode = false) {
-		// Désactiver tous les boutons "Tout lire"
-		document.querySelectorAll('.play-all-btn, .shuffle-btn').forEach(btn => {
-			btn.classList.remove('active');
-		});
+    const shuffleButtons = document.querySelectorAll('.shuffle-btn');
+    shuffleButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const listContainer = button.closest('.music-list');
+            const musicList = Array.from(listContainer.querySelectorAll('.music-item'));
+            if (musicList.length > 0) playMusicListSequentially(0, shuffleArray(musicList), true);
+        });
+    });
 
-		// Activer le bouton de la section concernée, si demandé
-		if (isActive) {
-			const parentList = musicList[0]?.closest('.music-list');
-			if (!parentList) return;
+    function shuffleArray(array) {
+        let newArray = array.slice();
+        for (let i = newArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+        }
+        return newArray;
+    }
 
-			const playBtn = parentList.querySelector('.play-all-btn');
-			const shuffleBtn = parentList.querySelector('.shuffle-btn');
+    // ---------- NEXT ----------
+    const nextBtn = document.getElementById('next-btn');
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            if (sequentialPlayActive) {
+                if (currentSequentialIndex < sequentialPlayList.length - 1) playNext(currentSequentialIndex + 1);
+            } else if (currentAudioPlayer) {
+                const idx = audioPlayers.indexOf(currentAudioPlayer);
+                if (idx !== -1 && idx < musicItems.length - 1) {
+                    const nextItem = musicItems[idx + 1];
+                    stopAllMusic();
+                    currentAudioPlayer = audioPlayers[idx + 1];
+                    updateMusicInfo(nextItem.getAttribute('data-title'), nextItem.getAttribute('data-artist'), nextItem.getAttribute('data-cover'));
+                    currentAudioPlayer.volume = globalVolume;
+                    currentAudioPlayer.play();
+                    startLogoSpin();
+                    currentAudioPlayer.onended = () => stopLogoSpin();
+                }
+            }
+        });
+    }
 
-			if (shuffleMode && shuffleBtn) {
-				shuffleBtn.classList.add('active');
-			} else if (playBtn) {
-				playBtn.classList.add('active');
-			}
-		}
-	}
-	
-	// Mélange des musiques
-	function shuffleArray(array) {
-		const shuffled = array.slice(); // Copie
-		for (let i = shuffled.length - 1; i > 0; i--) {
-			const j = Math.floor(Math.random() * (i + 1));
-			[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-		}
-		return shuffled;
-	}
-	
-	
-	const nextButton = document.getElementById('next-btn');
+    // ---------- PREV (clic court / long) ----------
+    const prevBtn = document.getElementById('prev-btn');
+    if (prevBtn) {
+        prevBtn.addEventListener('mousedown', () => {
+            longClickTriggered = false;
+            prevButtonPressTimer = setTimeout(() => {
+                longClickTriggered = true;
+                if (sequentialPlayActive && sequentialPlayList.length > 0) {
+                    playNext(0); // retour au début
+                }
+            }, longPressDuration);
+        });
 
-	nextButton.addEventListener('click', () => {
-		if (!currentAudioPlayer || !sequentialPlayActive) return;
+        prevBtn.addEventListener('mouseup', () => { clearTimeout(prevButtonPressTimer); });
+        prevBtn.addEventListener('mouseleave', () => { clearTimeout(prevButtonPressTimer); });
 
-		if (currentSequentialIndex < sequentialPlayList.length - 1) {
-			currentAudioPlayer.pause();
-			currentAudioPlayer.currentTime = 0;
-			playNext(currentSequentialIndex + 1);
-		}
-	});
+        prevBtn.addEventListener('click', () => {
+            if (longClickTriggered) { longClickTriggered = false; return; }
+
+            if (sequentialPlayActive) {
+                if (currentSequentialIndex > 0) playNext(currentSequentialIndex - 1);
+                else if (currentAudioPlayer) { currentAudioPlayer.currentTime = 0; currentAudioPlayer.play(); }
+            } else if (currentAudioPlayer) {
+                const idx = audioPlayers.indexOf(currentAudioPlayer);
+                if (idx > 0) {
+                    const prevItem = musicItems[idx - 1];
+                    stopAllMusic();
+                    currentAudioPlayer = audioPlayers[idx - 1];
+                    updateMusicInfo(prevItem.getAttribute('data-title'), prevItem.getAttribute('data-artist'), prevItem.getAttribute('data-cover'));
+                    currentAudioPlayer.volume = globalVolume;
+                    currentAudioPlayer.play();
+                    startLogoSpin();
+                    currentAudioPlayer.onended = () => stopLogoSpin();
+                } else {
+                    currentAudioPlayer.currentTime = 0; currentAudioPlayer.play();
+                }
+            }
+        });
+    }
+
+    // Exposer updatePlayAllButtonsState globalement (remplace le stub défensif)
+    function updatePlayAllButtonsState(musicList, isActive, shuffleMode = false) {
+        document.querySelectorAll('.play-all-btn, .shuffle-btn').forEach(btn => btn.classList.remove('active'));
+        if (!isActive || !musicList || !musicList[0]) return;
+        const parentList = musicList[0].closest('.music-list');
+        if (!parentList) return;
+        const playBtn = parentList.querySelector('.play-all-btn');
+        const shuffleBtn = parentList.querySelector('.shuffle-btn');
+        if (shuffleMode && shuffleBtn) shuffleBtn.classList.add('active');
+        else if (playBtn) playBtn.classList.add('active');
+    }
+    window.updatePlayAllButtonsState = updatePlayAllButtonsState;
+
+    // toggler play/pause global
+    if (playIcon) {
+        playIcon.addEventListener('click', () => {
+            if (currentAudioPlayer) togglePlayPause(currentAudioPlayer);
+            else console.warn("Aucune musique n'a été sélectionnée pour la lecture.");
+        });
+    }
+
+
+
 	
 	
 	
