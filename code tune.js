@@ -29,8 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // état global
     let currentAudioPlayer = null;
-    let currentMusicTitle = '';
-    let currentMusicArtist = '';
+    let currentMusicTitle = "";
+    let currentMusicArtist = "";
     let globalVolume = 0.5;
 
     // playlist / séquence
@@ -51,13 +51,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateMusicInfo(title, artist, cover) {
-        if (title !== undefined) {
+		if (title !== undefined) {
             playerTitle.textContent = title;
             mainMusicTitle.textContent = title;
+			currentMusicTitle = title;
         }
         if (artist !== undefined) {
             playerArtist.textContent = artist;
             mainMusicArtist.textContent = artist;
+			currentMusicArtist = artist;
         }
         if (cover) {
             if (playerCover) playerCover.src = cover;
@@ -337,9 +339,6 @@ document.addEventListener('DOMContentLoaded', () => {
             else console.warn("Aucune musique n'a été sélectionnée pour la lecture.");
         });
     }
-
-
-
 	
 	
 	
@@ -365,8 +364,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 				// Charger les paroles de la musique en cours
 			if (currentMusicTitle && lyricsDatabase[currentMusicTitle]) {
-				lyricsTitle.textContent = `Paroles de "${currentMusicTitle}"`; // Affiche le titre
-				lyricsText.innerHTML = lyricsDatabase[currentMusicTitle]; // Affiche les paroles avec HTML interprété
+				lyricsTitle.textContent = `Paroles de "${currentMusicTitle}"`;
+				lyricsText.innerHTML = lyricsDatabase[currentMusicTitle];
 			} else {
 				lyricsTitle.textContent = "Paroles indisponibles";
 				lyricsText.textContent = "Les paroles de cette musique ne sont pas disponibles.";
