@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const lyricsView = document.getElementById('lyrics-view');
     const lyricsText = document.getElementById('lyrics-text');
     const lyricsTitle = document.getElementById('lyrics-title');
+	
+	const queueBtn = document.getElementById('queue-btn');
+	const queueView = document.getElementById('queue-view');
     // éléments
     const musicItems = Array.from(document.querySelectorAll('.music-item'));
     const audioPlayers = Array.from(document.querySelectorAll('audio')); // converti en array pour indexOf
@@ -216,6 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (index + 1 >= sequentialPlayList.length) stopLogoSpin();
             playNext(index + 1);
         };
+		updateQueueList();
     }
 
     function playMusicListSequentially(startIndex, list, shuffle = false) {
@@ -273,6 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     currentAudioPlayer.volume = globalVolume;
                     currentAudioPlayer.play();
                     startLogoSpin();
+					updateQueueList();
                     currentAudioPlayer.onended = () => stopLogoSpin();
                 }
             }
@@ -311,6 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     currentAudioPlayer.volume = globalVolume;
                     currentAudioPlayer.play();
                     startLogoSpin();
+					updateQueueList();
                     currentAudioPlayer.onended = () => stopLogoSpin();
                 } else {
                     currentAudioPlayer.currentTime = 0; currentAudioPlayer.play();
@@ -342,36 +348,111 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	
 	
-	// Événement au clic sur le bouton Paroles
-	lyricsBtn.addEventListener('click', toggleLyricsView);
-
-	// Fonction pour basculer entre les vues
-	function toggleLyricsView() {
-		if (lyricsBtn.classList.contains('active')) {
-			// Revenir à la vue classique
-			lyricsBtn.classList.remove('active');
-			lyricsView.classList.add('hidden');
-			classicView.classList.remove('hidden');
-			lyricsView.style.display = "none"; // Cache la vue des paroles
-			classicView.style.display = "block"; // Réaffiche la vue classique
+	
+	function showView(viewToShow) {
+	  const views = document.querySelectorAll('.view');
+	  views.forEach(v => {
+		if (v === viewToShow) {
+		  v.classList.add('active');
 		} else {
-			// Afficher les paroles
-			lyricsBtn.classList.add('active');
-			lyricsView.classList.remove('hidden');
-			classicView.classList.add('hidden');
-			lyricsView.style.display = "block"; // Affiche la vue des paroles
-			classicView.style.display = "none"; // Cache la vue classique
+		  v.classList.remove('active');
+		}
+	  });
+	}
 
-				// Charger les paroles de la musique en cours
-			if (currentMusicTitle && lyricsDatabase[currentMusicTitle]) {
-				lyricsTitle.textContent = `Paroles de "${currentMusicTitle}"`;
-				lyricsText.innerHTML = lyricsDatabase[currentMusicTitle];
-			} else {
-				lyricsTitle.textContent = "Paroles indisponibles";
-				lyricsText.textContent = "Les paroles de cette musique ne sont pas disponibles.";
+	function clearActiveButtons() {
+		lyricsBtn.classList.remove('active');
+		queueBtn.classList.remove('active');
+	}
+
+	lyricsBtn.addEventListener('click', () => {
+		if (lyricsView.classList.contains('active')) {
+			showView(classicView);
+			lyricsBtn.classList.remove('active');
+		} else {
+			showView(lyricsView);
+			lyricsBtn.classList.add('active');
+			queueBtn.classList.remove('active');
+		}
+		
+
+		console.log("currentMusicTitle:", currentMusicTitle);
+
+		if (currentMusicTitle && lyricsDatabase[currentMusicTitle]) {
+            lyricsTitle.textContent = `Paroles de "${currentMusicTitle}"`;
+            console.log("Lyrics found:", lyricsDatabase[currentMusicTitle]);
+            lyricsText.innerHTML = lyricsDatabase[currentMusicTitle];
+        } else {
+            lyricsTitle.textContent = "Paroles indisponibles";
+            lyricsText.textContent = "Les paroles de cette musique ne sont pas disponibles.";
+            console.log("No lyrics found.");
+        }
+	});
+
+	queueBtn.addEventListener('click', () => {
+	  const isActive = queueView.classList.contains('active');
+
+	  if (isActive) {
+		showView(classicView);
+		queueBtn.classList.remove('active');
+	  } else {
+		showView(queueView);
+		queueBtn.classList.add('active');
+		lyricsBtn.classList.remove('active');
+		
+		updateQueueList();
+
+		// Remplissage de la liste QUEUE à l’ouverture
+		const queueList = document.getElementById('queueList');
+		queueList.innerHTML = "";
+
+		if (currentSequentialIndex === -1 || !sequentialPlayList.length) {
+		  const li = document.createElement('li');
+		  li.textContent = "Aucune musique à suivre.";
+		  queueList.appendChild(li);
+		  return;
+		}
+
+		for (let i = currentSequentialIndex; i < sequentialPlayList.length; i++) {
+		  const item = sequentialPlayList[i];
+		  const title = item.getAttribute('data-title') || "Titre inconnu";
+		  const artist = item.getAttribute('data-artist') || "Artiste inconnu";
+
+		  const li = document.createElement('li');
+		  li.textContent = `${title} — ${artist}`;
+		  if (i === currentSequentialIndex) li.style.fontWeight = "bold";
+		  queueList.appendChild(li);
+		
+		updateQueueList();
+		}
+	  }
+	});
+	
+	function updateQueueList() {
+		const queueList = document.getElementById('queueList');
+		queueList.innerHTML = "";
+
+		if (currentSequentialIndex === -1 || !sequentialPlayList.length) {
+			const li = document.createElement('li');
+			li.textContent = "Aucune musique à suivre.";
+			queueList.appendChild(li);
+			return;
+		}
+
+		for (let i = currentSequentialIndex; i < sequentialPlayList.length; i++) {
+			const item = sequentialPlayList[i];
+			const title = item.getAttribute('data-title') || "Titre inconnu";
+			const artist = item.getAttribute('data-artist') || "Artiste inconnu";
+
+			const li = document.createElement('li');
+			li.textContent = `${title} — ${artist}`;
+			if (i === currentSequentialIndex) {
+				li.classList.add('current-track');
 			}
+			queueList.appendChild(li);
 		}
 	}
+
 
 	// Base de données de paroles
 	const lyricsDatabase = {

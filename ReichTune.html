@@ -38,7 +38,7 @@
         <!-- Section principale pour la recherche, file d'attente, paroles ou accueil -->
         <div id="center-section">
             <!-- Contenu de base -->
-            <div id="classic-view" class="view">
+            <div id="classic-view" class="view active">
 			<div id="home-section">
                 <h1>Bienvenue</h1>
                 <p>Explorez nos collections de musique.</p>
@@ -165,12 +165,17 @@
             </div>
 			</div>
 			
-			<div id="lyrics-view" class="view hidden">
-        <div id="lyrics-content">
-            <h2 id="lyrics-title">Paroles</h2>
-            <pre id="lyrics-text">Les paroles s'afficheront ici...</pre>
-        </div>
-    </div>
+			<div id="lyrics-view" class="view">
+				<div id="lyrics-content">
+					<h2 id="lyrics-title">Paroles</h2>
+					<pre id="lyrics-text">Les paroles s'afficheront ici...</pre>
+				</div>
+			</div>
+			
+			<div id="queue-view" class="view">
+				<h2>À suivre</h2>
+				<ul id="queueList"></ul>
+			</div>
         </div>
     </div>
 
@@ -195,7 +200,7 @@
         <div id="player-options">
             <input type="range" id="volume-control" value="50" min="0" max="100">
             <button id="lyrics-btn">Paroles</button>
-            <button id="queue-btn">Liste d'attente</button>
+            <button id="queue-btn">A suivre</button>
         </div>
     </div>
 

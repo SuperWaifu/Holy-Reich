@@ -4,6 +4,7 @@ body {
     margin: 0;
     background: #121212;
     color: #ffffff;
+	overflow: hidden; /* Evite scroll global */
 }
 
 /* Barre de navigation */
@@ -178,6 +179,7 @@ body {
     align-items: center;
     padding: 10px 20px;
 	z-index: 5;
+	box-sizing: border-box;
 }
 
 /* Style général de la barre de progression */
@@ -260,6 +262,15 @@ body {
     align-items: center;
 }
 
+#queue-btn {
+    margin-left: 5px; /* Petit espace avec le bouton précédent */
+}
+
+#queue-btn.active {
+    background-color: #621bc1;
+    color: white;
+}
+
 button {
     background: none;
     border: none;
@@ -272,6 +283,24 @@ input[type="range"] {
     margin: 0 10px;
 }
 
+
+/* Transition fluide pour les fenêtres */
+
+.view {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  position: absolute; /* si tu veux empiler au même endroit */
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: inherit; /* pour avoir le fond de la page */
+  overflow-y: auto;
+}
+
+.view.active {
+  opacity: 1;
+  pointer-events: auto;
+  position: relative; /* ou fixed si tu veux */
+}
 
 
 /* Conteneur principal des listes */
@@ -426,11 +455,12 @@ input[type="range"] {
 
 /* Vue des paroles */
 #lyrics-view {
-    display: none;
+    display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100%;
+    justify-content: flex-start;
+    height: 92%;
+	width: 96%;
     background: linear-gradient(45deg, #6a11cb, #2575fc); /* Dégradé */
     color: #fff;
     padding: 20px;
@@ -439,9 +469,10 @@ input[type="range"] {
 }
 
 #lyrics-title {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: bold;
     margin-bottom: 20px;
+	flex-shrink: 0;
 }
 
 #lyrics-text {
@@ -481,4 +512,35 @@ input[type="range"] {
 
 #lyrics-content::-webkit-scrollbar-track {
     background: #444; /* Couleur de l’arrière-plan */
+}
+
+#queue-view {
+    background: #222;
+}
+
+#queue-view h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+#queueList {
+    list-style: none;
+    padding-left: 0;
+    max-height: 100%;
+    overflow-y: auto;
+}
+
+#queueList li {
+    padding: 10px;
+    border-bottom: 1px solid #444;
+    font-size: 18px;
+}
+
+#queueList li.current-track {
+    font-weight: bold;
+    background-color: rgba(98, 27, 193, 0.3);
+    border-radius: 5px;
+    padding: 5px 10px;
 }
