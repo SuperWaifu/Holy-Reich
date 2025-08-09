@@ -538,6 +538,11 @@ input[type="range"] {
     font-size: 18px;
 }
 
+.previous-track {
+    opacity: 0.6;
+    font-style: italic;
+}
+
 #queueList li.current-track {
     font-weight: bold;
     background-color: rgba(98, 27, 193, 0.3);

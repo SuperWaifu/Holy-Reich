@@ -401,31 +401,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		lyricsBtn.classList.remove('active');
 		
 		updateQueueList();
-
-		// Remplissage de la liste QUEUE à l’ouverture
-		const queueList = document.getElementById('queueList');
-		queueList.innerHTML = "";
-
-		if (currentSequentialIndex === -1 || !sequentialPlayList.length) {
-		  const li = document.createElement('li');
-		  li.textContent = "Aucune musique à suivre.";
-		  queueList.appendChild(li);
-		  return;
 		}
-
-		for (let i = currentSequentialIndex; i < sequentialPlayList.length; i++) {
-		  const item = sequentialPlayList[i];
-		  const title = item.getAttribute('data-title') || "Titre inconnu";
-		  const artist = item.getAttribute('data-artist') || "Artiste inconnu";
-
-		  const li = document.createElement('li');
-		  li.textContent = `${title} — ${artist}`;
-		  if (i === currentSequentialIndex) li.style.fontWeight = "bold";
-		  queueList.appendChild(li);
-		
-		updateQueueList();
-		}
-	  }
 	});
 	
 	function updateQueueList() {
@@ -439,7 +415,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			return;
 		}
 
-		for (let i = currentSequentialIndex; i < sequentialPlayList.length; i++) {
+		const startIndex = Math.max(currentSequentialIndex - 1, 0);
+
+		for (let i = startIndex; i < sequentialPlayList.length; i++) {
 			const item = sequentialPlayList[i];
 			const title = item.getAttribute('data-title') || "Titre inconnu";
 			const artist = item.getAttribute('data-artist') || "Artiste inconnu";
@@ -448,6 +426,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			li.textContent = `${title} — ${artist}`;
 			if (i === currentSequentialIndex) {
 				li.classList.add('current-track');
+			}
+			if (i === currentSequentialIndex - 1) {
+				li.classList.add('previous-track');
 			}
 			queueList.appendChild(li);
 		}
