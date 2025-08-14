@@ -1,0 +1,54 @@
+@font-face {
+  font-family: 'Hestina Font';
+  src: url('Hestina Font.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bohemian Typewriter';
+  src: url('Bohemian Typewriter.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.rail-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: auto;
+}
+
+.rail-image {
+    width: 100%;
+    display: block;
+}
+
+.stop {
+    position: absolute;
+    text-align: center;
+    transform: translate(-50%, -50%);
+}
+
+.dot {
+    width: 20px;
+    height: 20px;
+    background: gold;
+    border-radius: 50%;
+    border: 2px solid black;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.dot:hover {
+    transform: scale(1.2);
+    background: orange;
+}
+
+.city-name {
+    display: block;
+    margin-top: 8px;
+    font-size: 18px;
+    color: gold;
+    text-shadow: 1px 1px 2px black;
+}

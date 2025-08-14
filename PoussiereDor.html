@@ -5,8 +5,10 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="style1.css">
 	<link rel="stylesheet" href="Musique.css">
+	<link rel="stylesheet" href="style poussiere.css">
 	<link rel="shortcut icon" href="logo/Lereich.png" />
 	<script src="code.js"></script>
+	<script src="code poussiere.js"></script>
 	
   </head>
   <header>
@@ -35,6 +37,35 @@
 	</div>
 	</div>
 	
+	<h2>Trajet de l'Autral-Express</h2>
+	
+	<div class="rail-container">
+		<img src="logo/deco/rail.png" alt="Ligne de train" class="rail-image">
+
+		<!-- Arrêt 1 -->
+		<div class="stop" style="left: 4.4%; top: 26.6%;">
+			<div class="dot" data-target="#Utopia"></div>
+			<span class="city-name">Utopia</span>
+		</div>
+		<!-- Arrêt 2 -->
+		<div class="stop" style="left: 34.2%; top: 91.8%;">
+			<div class="dot" data-target="#Verdombre"></div>
+			<span class="city-name">Verdombre</span>
+		</div>
+		<!-- Arrêt 3 -->
+		<div class="stop" style="left: 67.6%; top: 44.05%;">
+			<div class="dot" data-target="#NewArk"></div>
+			<span class="city-name">NewArk</span>
+		</div>
+		<!-- Arrêt 4 -->
+		<div class="stop" style="left: 98.2%; top: 72.9%;">
+			<div class="dot" data-target="#Prina"></div>
+			<span class="city-name">Prina</span>
+		</div>
+	</div>
+	
+	<br>
+	
 	<div class="decor">
 	<div class="content">
 	  <img src="paysages/Poussiere 1.png" alt="" onclick="openModal(this)">
@@ -44,6 +75,7 @@
 	</div>
 	</div>
 	
+	<div id="Utopia"></div>
 	<h1>Utopia</h1>
 	<h2>Ancienne capitale du Sultanat, Utopia était une ville prospère ...</h2>
 	
@@ -64,6 +96,7 @@
     </div>
 	</div>
 	
+	<div id="Verdombre"></div>
 	<h1>Verdombre</h1>
 	<h2>Un oasis au milieu du désert, que peut-il mal se passer ?</h2>
 	
@@ -96,6 +129,7 @@
     </div>
 	</div>
 	
+	<div id="NewArk"></div>
 	<h1>NewArk</h1>
 	<h2>Une communauté de pilleurs unis sous une même bannière, étrangement, politiquement stable.</h2>
 	
@@ -132,10 +166,11 @@
     </div>
 	</div>
 	
+	<div id="Prina"></div>
 	<h1>Résidence de Prina</h1>
 	<h2>La résidence d'été de l'empereur, dernier reliquat de l'ancienne terre de Poussière d'or.</h2>
 
-		<div class="decor">
+	<div class="decor">
 	<div class="content">
 	  <img src="paysages/Prina 1.png" alt="" onclick="openModal(this)">
 	  <figcaption>Le grand jardin du serment</figcaption>
