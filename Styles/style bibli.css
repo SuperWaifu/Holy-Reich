@@ -1,0 +1,187 @@
+@font-face {
+  font-family: 'Victoriana';
+  src: url('Police décriture/Victoriana.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+/* Réserve la place à droite pour les lettres */
+.dossier-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+.enveloppe-dossier {
+	position: relative;
+    flex: 0 0 300px; /* largeur fixe */
+}
+
+.titre-dossier {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%) rotate(-15deg);
+    font-size: 64px;
+    font-family: 'Victoriana';
+    color: rgba(0, 0, 0, 0.8);
+    pointer-events: none; /* évite d'interférer avec les clics */
+    white-space: nowrap;
+}
+
+/* Place le contenu dossier absolument à droite */
+.contenu-dossier {
+    display: grid;
+    grid-auto-flow: column;        /* remplit d'abord en hauteur, puis nouvelle colonne */
+    grid-template-rows: repeat(3, 120px); /* 3 cartes par colonne */
+    column-gap: 30px;              /* espace horizontal entre colonnes */
+    row-gap: 50px; 	/* espace vertical entre cartes */
+}
+
+.contenu-dossier.cache {
+    display: none;
+}
+
+/* Taille réduite */
+.carte-container {
+    width: 150px;
+    height: 120px;
+	margin: 0;
+	flex: none;
+}
+
+.carte {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s;
+    cursor: pointer;
+	padding-bottom: 50px;
+}
+
+.header-lettre {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 6px;
+}
+
+.date-lettre {
+    font-size: 0.9em;
+    font-style: italic;
+}
+
+.timbre {
+    position: absolute;
+    top: 10px;
+    right: 10px; /* ou left si tu veux */
+    max-width: 60px;
+    height: auto;
+}
+
+/* Arrière-plan recto et verso */
+.recto, .verso {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    background-color: #f2eecb;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+/* Timbre sur le recto */
+.recto {
+    padding: 10px;
+    background-color: #f2eecb;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    position: relative;
+}
+
+/* Texte du recto */
+.texte-recto {
+    margin-top: 60px; /* pour laisser la place au timbre */
+    text-align: center;
+    font-weight: bold;
+}
+
+
+.verso {
+    transform: rotateY(180deg);
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+/* Carte agrandie au centre */
+.carte.active {
+    position: fixed !important;
+    top: 50%;
+    left: 50%;
+    width: 600px !important;
+    height: 400px !important;
+    transform: translate(-50%, -50%);
+    z-index: 2000; /* plus haut que l’overlay */
+    background-color: #f2eecb;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+
+.carte.active .recto {
+    display: none;
+}
+
+.carte.active .verso {
+    transform: none;
+    backface-visibility: visible;
+}
+
+/* Signature dans la lettre */
+.signature {
+    display: block;
+    max-width: 40%; /* ne prend jamais plus de 40% de la largeur */
+    height: auto;
+    margin-top: 20px;
+}
+
+/* Overlay derrière la carte */
+.overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    z-index: 1500;
+}
+.overlay.visible {
+    display: block;
+}
+
+
+.tableau-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.tableau-image {
+    width: 200px;
+    height: auto;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    transition: transform 0.3s;
+}
+.tableau-image:hover {
+    transform: scale(1.05);
+}
+
+.tableau-image.active {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 800px;
+    height: auto;
+    transform: translate(-50%, -50%);
+    z-index: 2000;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
