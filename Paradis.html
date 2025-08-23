@@ -3,12 +3,15 @@
   <head>
     <title>Paradis</title>
     <meta charset="utf-8">
-	<link rel="stylesheet" href="style paradis.css">
+	<link rel="stylesheet" href="Styles/style paradis.css">
 	<link rel="stylesheet" href="Musique.css">
 	<link rel="shortcut icon" href="logo/Lereich.png" />
-	<script src="code.js"></script>
+	<script src="Codes/code paradis.js"></script>
+	<!-- <script src="code.js"></script>     déplacé à la fin-->
 	
   </head>
+  
+  <body>
   <header>
   	<nav>
       <ul>
@@ -24,138 +27,156 @@
     </nav>
   </header>
   
-  <body>
-    <h1>Paradis</h1>
-	<h2>Lié au Holy-Reich</h2>
-	
-	<div class="background-animation"></div>
+  <div class="background-animation"></div>
+  
+  <!-- Vidéo centrale -->
+  <div class="video-container">
+	  <video id="introVideo" autoplay muted loop>
+		<source src="logo/deco/Portal.mp4" type="video/mp4">
+		Votre navigateur ne supporte pas la vidéo. (Essayez Holy-Chrome)
+	  </video>
+  </div>
 
-	<div class="decor">
-	<div class="content">
-	  <img src="paysages/Paradis 1.png" alt="" onclick="openModal(this)">
-	  <figcaption>Une région mythique à la perfection constante</figcaption>
-	  <img src="paysages/Paradis 2.png" alt="" onclick="openModal(this)">
-	  <figcaption>Divers temples ornent les plus hauts pics</figcaption>
-	</div>
-	</div>
-	
-	<h3>Anges (5)</h3>
-    <div class="gallery">
-	<div class="content">
-	  <img src="waifu/Eveche/Ange 1.png" alt="" onclick="openModal(this)">
-	  <figcaption> <div onclick="showCaption(this)" > <p class="description">Héhé...</p> <h6>
-		𝕮𝖊 𝖓'𝖊𝖘𝖙 𝖖𝖚'𝖚𝖓𝖊 𝕬𝖓𝖌𝖊, 𝖆 𝖛𝖗𝖆𝖎 𝖉𝖎𝖗𝖊 𝖈'𝖊𝖘𝖙 [XXX], 𝖚𝖓 𝖊𝖙𝖗𝖊 𝖉𝖎𝖛𝖎𝖓 𝖕𝖗𝖔𝖛𝖊𝖓𝖆𝖓𝖙 𝖉𝖚 𝖕𝖆𝖗𝖆𝖉𝖎𝖘.
-			<br><br>
-		E҉l҉l҉e҉ ҉n҉e҉ ҉d҉e҉v҉r҉a҉i҉ ҉p҉a҉s҉ ҉ê҉t҉r҉e҉ ҉i҉c҉i҉,҉  ҉l҉'҉e҉m҉p҉e҉r҉e҉u҉r҉ ҉l҉'҉a҉ ҉t҉r҉o҉p҉ ҉c҉ô҉t҉o҉y҉é҉e҉,҉  ҉e҉l҉l҉e҉ ҉r҉i҉s҉q҉u҉e҉ ҉d҉e҉ ҉f҉o҉r҉m҉e҉r҉ ҉l҉e҉ ҉l҉i҉e҉n҉
-	  </h6> </div> </figcaption>
-	  <img src="waifu/Eveche/Ange 2.png" alt="" onclick="openModal(this)">
-	  <figcaption>Héhé...</figcaption>
-	  <img src="waifu/Eveche/Ange 3.png" alt="" onclick="openModal(this)">
-	  <figcaption>Héhé...</figcaption>
-	  <img src="waifu/Eveche/Ange 4.png" alt="" onclick="openModal(this)">
-	  <figcaption>Héhé...</figcaption>
-	  <img src="waifu/Eveche/Ange 5.png" alt="" onclick="openModal(this)">
-	  <figcaption>Héhé...</figcaption>
-    </div>
+  <!-- Overlay d’intro -->
+    <div class="overlay" id="overlay">
+	  <div class="overlay-text">✨ Une lumière divine embrasse l’éternité ✨</div>
 	</div>
 
-	<h3>Harpie</h3>
-    <div class="gallery">
-	<div class="content">
-	  <img src="waifu/Eveche/Harpie.png" alt="" onclick="openModal(this)">
-	  <figcaption> <div onclick="showCaption(this)" > <p class="description">Héhé...</p> <h6>
-		X
-			<br><br>
-		XX
-			<br><br>
-		XXX
-	  </h6> </div> </figcaption>
-    </div>
-	</div>
-	
-	<div onclick="lore(this)"> <h2> <i>[Légende de la Harpie]</i></h2>
-		<h4>
-			<u> Légende de la Harpie </u>
-			<br><br>
-			Les rayons dorés de l'aube se déversaient sur les hautes tours du palais de l'empereur, créant un éclat éclatant qui semblait bénir le Holy-Reich chaque matin. <br> Assis sur son trône d'ivoire, l'empereur regardait le paysage au-delà des vitraux colorés de sa salle du trône. <br> Malgré la magnificence de son royaume, son cœur était lourd de soucis.
-			<br><br>
-			La montée en puissance du Sultanat de la Poussière d'or au sud était devenue une menace réelle. <br> Le Sultan, un homme audacieux, avait rejeté la foi ancestrale des Limbes, préférant se consacrer à l'enrichissement et au commerce. <br> Ses terres prospéraient sous le commerce des épices, des métaux rares et des pierres précieuses. <br> Les coffres du Sultan débordaient d'or, attirant de plus en plus d'alliés parmi les royaumes voisins. <br> Mais ce n'était pas la richesse de ses voisins qui préoccupait l’empereur, c'était leur renonciation à la foi.
-			<br><br>
-			Le Holy-Reich se considérait comme le protecteur de la foi divine, un bastion de pureté dans un monde de tentations. La prospérité sans foi du Sultanat était une hérésie qui ne pouvait être ignorée. <br> Les conseillers de l’empereur murmuraient à ses oreilles jour et nuit, lui conseillant d'agir, de frapper avant que le Sultan ne devienne une menace incontrôlable. <br> Et alors qu'il priait dans la grande cathédrale, les statues de marbre des anges et des saints le fixaient, leurs yeux froids semblant juger ses hésitations.
-			<br><br>
-			Un soir, alors que le ciel était teinté de pourpre, l’empereur s'agenouilla devant l'autel, priant avec plus de ferveur que jamais. Son cœur était déchiré entre son devoir en tant qu'empereur et son désir de paix. <br> Dans les profondeurs de sa prière, une lumière divine l'enveloppa soudainement, et une voix céleste résonna autour de lui. 
-			<br><br>
-			« Toi, fils dévoué de la lumière, nous avons entendu tes supplications. » C’était la voix des êtres divins, les Gardiens des Limbes. <br> 
-			« Le Sultanat de la Poussière d'or s'éloigne de notre lumière. Toi, notre champion, conduiras nos armées pour ramener la foi dans ces terres. »
-			<br><br>
-			Avec le soutien des dieux, l’empereur sentit son hésitation disparaître, remplacée par une détermination de fer. Il ordonna la mobilisation de ses armées, et le Holy-Reich se prépara à la guerre. <br> Les bannières sacrées furent levées, les chevaliers bénis, et les prêtres priaient pour une victoire rapide et décisive. 
-			<br><br>
-			La guerre fut brutale. Les champs du Sultanat, autrefois verts et fertiles, étaient désormais des terrains de batailles ensanglantés. <br> Les armées des deux nations s'affrontaient dans des affrontements féroces, les éclats des lames illuminant les nuits sombres. <br> L’empereur, menant ses troupes depuis le front, fit preuve de bravoure, brandissant son épée d'or contre les forces du Sultan. Mais malgré les victoires, le prix de la guerre pesait lourdement sur son esprit.
-			<br><br>
-			C'est au milieu de cette guerre interminable que l’empereur fit une rencontre inattendue. <br> Dans les plaines arides du Sultanat, après une bataille particulièrement meurtrière, il trouva une harpie, une créature ailée, gisant au sol, blessée. <br> Ses ailes étaient brisées, et ses plumes étaient tachées de sang. Ses yeux ambrés le fixaient avec une lueur de défi, mais aussi de peur.
-			<br><br>
-			« Empereur, » murmura-t-elle, sa voix faible mais claire. « Pourquoi cette guerre? Pourquoi détruire ce qui a été construit avec tant d’effort? »
-			<br><br>
-			L’empereur resta silencieux, observant la créature à ses pieds. Elle était une beauté tragique, une créature du ciel abattue au sol. <br> Dans ses yeux, il vit non seulement la douleur mais aussi la vérité de ses propres actions. <br> En cherchant à imposer sa foi, avait-il oublié les principes mêmes de compassion et de miséricorde qu'il prêchait?
-			<br><br>
-			Les divins apparurent à ce moment, leurs formes lumineuses entourant L’empereur et la harpie. « Achève-la, » ordonna une des voix. « Sacrifie-la, et nous te donnerons la victoire, le Sultanat tout entier sera à toi. »
-			<br><br>
-			L’empereur leva son épée, son cœur battant furieusement. Il voyait le visage de ses sujets, ceux qui avaient donné leur vie pour cette guerre, ceux qui attendaient chez eux, priant pour son succès. <br> Mais il voyait aussi les ruines, la destruction, et la harpie à ses pieds, une victime de sa quête aveugle de pouvoir.
-			<br><br>
-			Dans un mouvement fluide, il abaissa son épée... mais non pour tuer. Il trancha ses propres liens avec les divins, renonçant à leur offre. <br> « Non. » déclara-t-il fermement. « Je choisis la vie. Je choisis la miséricorde. Si cela signifie la perte de mon royaume, alors soit. »
-			<br><br>
-			La harpie, émue par son geste, fit une promesse. « Pour ton acte de compassion, je te jure fidélité. Je te servirai jusqu'à mon dernier souffle. »
-			<br><br>
-			Les divins, furieux de la trahison de l’empereur, maudirent le Sultanat. Le sol fertile devint un désert inhospitalier, et les cités prospères furent réduites à des ruines poussiéreuses, vestiges d’un passé glorieux. <br> Quant à l’empereur, il retourna dans son royaume avec la harpie à ses côtés, sachant qu'il avait perdu les terres mais gagné quelque chose de bien plus précieux : son humanité.
-			<br><br>
-			Dans les années qui suivirent, le Holy-Reich prospéra non pas par la conquête, mais par la sagesse et la compassion de son empereur. <br> La harpie, fidèle à sa parole, veilla sur lui et le conseilla, devenant l’ombre de l’empereur, tandis que son histoire et ainsi son existence disparurent avec la mort des anciens guerriers. <br> Et ainsi, même dans les Limbes, un monde divisé par le pouvoir et la foi, la lumière de la miséricorde brilla encore.
-		</h4>
-	</div>
-	
-	<h3>Musique découlant de la légende :</h3>
-	
+  <!-- Musique céleste -->
+    <audio id="introSound" src="Musiques/Bruitage/paradis.mp3"></audio>
+
+
+  <!-- Contenu principal -->
+	<div class="main-content" id="mainContent">
+		<h1>Paradis</h1>
+		<h2>Lié au Holy-Reich</h2>
+
 		<div class="decor">
-	<audio class="audio-player" src="Musiques/L'alliance divine.mp3"></audio>
-	<div class="custom-audio-player">
-		<button class="play-button control-button">Play</button>
-		<button class="pause-button control-button">Pause</button>
-		<button class="stop-button control-button">Stop</button>
-		<div class="progress-container">
-	<div class="progress-bar"></div>
+		<div class="content">
+		  <img src="paysages/Paradis 1.png" alt="" onclick="openModal(this)">
+		  <figcaption>Une région mythique à la perfection constante</figcaption>
+		  <img src="paysages/Paradis 2.png" alt="" onclick="openModal(this)">
+		  <figcaption>Divers temples ornent les plus hauts pics</figcaption>
 		</div>
-		<span class="timestamp">0:00 / 0:00</span>
-		<input type="range" class="volume-slider" min="0" max="1" step="0.01" value="0.7">
-	</div>
-	</div>
-	
-	<div class="decor">
-	<div class="content">
-	  <img src="paysages/Mosaique harpie.png">
-	</div>
-	</div>
-	
-	<div class="modal">
-        <div class="modal-content">
-            <div class="modal-navigation">
-                <button class="modal-prev" onclick="prevImage()">&lt;</button>
-                <div class="modal-image-container">
-                <img id="modal-img" src="" alt="" onclick="closeModal()">
-                </div>
-                <button class="modal-next" onclick="nextImage()">&gt;</button>
-            </div>
-                <div class="modal-caption" id="modal-caption"> </div>
-        </div>
-        <div class="modal-details"> </div>
-    </div>
+		</div>
+		
+		<h3>Anges (5)</h3>
+		<div class="gallery">
+		<div class="content">
+		  <img src="waifu/Eveche/Ange 1.png" alt="" onclick="openModal(this)">
+		  <figcaption> <div onclick="showCaption(this)" > <p class="description">Héhé...</p> <h6>
+			𝕮𝖊 𝖓'𝖊𝖘𝖙 𝖖𝖚'𝖚𝖓𝖊 𝕬𝖓𝖌𝖊, 𝖆 𝖛𝖗𝖆𝖎 𝖉𝖎𝖗𝖊 𝖈'𝖊𝖘𝖙 [XXX], 𝖚𝖓 𝖊𝖙𝖗𝖊 𝖉𝖎𝖛𝖎𝖓 𝖕𝖗𝖔𝖛𝖊𝖓𝖆𝖓𝖙 𝖉𝖚 𝖕𝖆𝖗𝖆𝖉𝖎𝖘.
+				<br><br>
+			E҉l҉l҉e҉ ҉n҉e҉ ҉d҉e҉v҉r҉a҉i҉ ҉p҉a҉s҉ ҉ê҉t҉r҉e҉ ҉i҉c҉i҉,҉  ҉l҉'҉e҉m҉p҉e҉r҉e҉u҉r҉ ҉l҉'҉a҉ ҉t҉r҉o҉p҉ ҉c҉ô҉t҉o҉y҉é҉e҉,҉  ҉e҉l҉l҉e҉ ҉r҉i҉s҉q҉u҉e҉ ҉d҉e҉ ҉f҉o҉r҉m҉e҉r҉ ҉l҉e҉ ҉l҉i҉e҉n҉
+		  </h6> </div> </figcaption>
+		  <img src="waifu/Eveche/Ange 2.png" alt="" onclick="openModal(this)">
+		  <figcaption>Héhé...</figcaption>
+		  <img src="waifu/Eveche/Ange 3.png" alt="" onclick="openModal(this)">
+		  <figcaption>Héhé...</figcaption>
+		  <img src="waifu/Eveche/Ange 4.png" alt="" onclick="openModal(this)">
+		  <figcaption>Héhé...</figcaption>
+		  <img src="waifu/Eveche/Ange 5.png" alt="" onclick="openModal(this)">
+		  <figcaption>Héhé...</figcaption>
+		</div>
+		</div>
 
-	<div class="lore" onclick="closelore()">
-		<div class="lore-content">
-		    <div id="lore-caption"></div>
-
-			
+		<h3>Harpie</h3>
+		<div class="gallery">
+		<div class="content">
+		  <img src="waifu/Eveche/Harpie.png" alt="" onclick="openModal(this)">
+		  <figcaption> <div onclick="showCaption(this)" > <p class="description">Héhé...</p> <h6>
+			X
+				<br><br>
+			XX
+				<br><br>
+			XXX
+		  </h6> </div> </figcaption>
+		</div>
+		</div>
+		
+		<div onclick="lore(this)"> <h2> <i>[Légende de la Harpie]</i></h2>
+			<h4>
+				<u> Légende de la Harpie </u>
+				<br><br>
+				Les rayons dorés de l'aube se déversaient sur les hautes tours du palais de l'empereur, créant un éclat éclatant qui semblait bénir le Holy-Reich chaque matin. <br> Assis sur son trône d'ivoire, l'empereur regardait le paysage au-delà des vitraux colorés de sa salle du trône. <br> Malgré la magnificence de son royaume, son cœur était lourd de soucis.
+				<br><br>
+				La montée en puissance du Sultanat de la Poussière d'or au sud était devenue une menace réelle. <br> Le Sultan, un homme audacieux, avait rejeté la foi ancestrale des Limbes, préférant se consacrer à l'enrichissement et au commerce. <br> Ses terres prospéraient sous le commerce des épices, des métaux rares et des pierres précieuses. <br> Les coffres du Sultan débordaient d'or, attirant de plus en plus d'alliés parmi les royaumes voisins. <br> Mais ce n'était pas la richesse de ses voisins qui préoccupait l’empereur, c'était leur renonciation à la foi.
+				<br><br>
+				Le Holy-Reich se considérait comme le protecteur de la foi divine, un bastion de pureté dans un monde de tentations. La prospérité sans foi du Sultanat était une hérésie qui ne pouvait être ignorée. <br> Les conseillers de l’empereur murmuraient à ses oreilles jour et nuit, lui conseillant d'agir, de frapper avant que le Sultan ne devienne une menace incontrôlable. <br> Et alors qu'il priait dans la grande cathédrale, les statues de marbre des anges et des saints le fixaient, leurs yeux froids semblant juger ses hésitations.
+				<br><br>
+				Un soir, alors que le ciel était teinté de pourpre, l’empereur s'agenouilla devant l'autel, priant avec plus de ferveur que jamais. Son cœur était déchiré entre son devoir en tant qu'empereur et son désir de paix. <br> Dans les profondeurs de sa prière, une lumière divine l'enveloppa soudainement, et une voix céleste résonna autour de lui. 
+				<br><br>
+				« Toi, fils dévoué de la lumière, nous avons entendu tes supplications. » C’était la voix des êtres divins, les Gardiens des Limbes. <br> 
+				« Le Sultanat de la Poussière d'or s'éloigne de notre lumière. Toi, notre champion, conduiras nos armées pour ramener la foi dans ces terres. »
+				<br><br>
+				Avec le soutien des dieux, l’empereur sentit son hésitation disparaître, remplacée par une détermination de fer. Il ordonna la mobilisation de ses armées, et le Holy-Reich se prépara à la guerre. <br> Les bannières sacrées furent levées, les chevaliers bénis, et les prêtres priaient pour une victoire rapide et décisive. 
+				<br><br>
+				La guerre fut brutale. Les champs du Sultanat, autrefois verts et fertiles, étaient désormais des terrains de batailles ensanglantés. <br> Les armées des deux nations s'affrontaient dans des affrontements féroces, les éclats des lames illuminant les nuits sombres. <br> L’empereur, menant ses troupes depuis le front, fit preuve de bravoure, brandissant son épée d'or contre les forces du Sultan. Mais malgré les victoires, le prix de la guerre pesait lourdement sur son esprit.
+				<br><br>
+				C'est au milieu de cette guerre interminable que l’empereur fit une rencontre inattendue. <br> Dans les plaines arides du Sultanat, après une bataille particulièrement meurtrière, il trouva une harpie, une créature ailée, gisant au sol, blessée. <br> Ses ailes étaient brisées, et ses plumes étaient tachées de sang. Ses yeux ambrés le fixaient avec une lueur de défi, mais aussi de peur.
+				<br><br>
+				« Empereur, » murmura-t-elle, sa voix faible mais claire. « Pourquoi cette guerre? Pourquoi détruire ce qui a été construit avec tant d’effort? »
+				<br><br>
+				L’empereur resta silencieux, observant la créature à ses pieds. Elle était une beauté tragique, une créature du ciel abattue au sol. <br> Dans ses yeux, il vit non seulement la douleur mais aussi la vérité de ses propres actions. <br> En cherchant à imposer sa foi, avait-il oublié les principes mêmes de compassion et de miséricorde qu'il prêchait?
+				<br><br>
+				Les divins apparurent à ce moment, leurs formes lumineuses entourant L’empereur et la harpie. « Achève-la, » ordonna une des voix. « Sacrifie-la, et nous te donnerons la victoire, le Sultanat tout entier sera à toi. »
+				<br><br>
+				L’empereur leva son épée, son cœur battant furieusement. Il voyait le visage de ses sujets, ceux qui avaient donné leur vie pour cette guerre, ceux qui attendaient chez eux, priant pour son succès. <br> Mais il voyait aussi les ruines, la destruction, et la harpie à ses pieds, une victime de sa quête aveugle de pouvoir.
+				<br><br>
+				Dans un mouvement fluide, il abaissa son épée... mais non pour tuer. Il trancha ses propres liens avec les divins, renonçant à leur offre. <br> « Non. » déclara-t-il fermement. « Je choisis la vie. Je choisis la miséricorde. Si cela signifie la perte de mon royaume, alors soit. »
+				<br><br>
+				La harpie, émue par son geste, fit une promesse. « Pour ton acte de compassion, je te jure fidélité. Je te servirai jusqu'à mon dernier souffle. »
+				<br><br>
+				Les divins, furieux de la trahison de l’empereur, maudirent le Sultanat. Le sol fertile devint un désert inhospitalier, et les cités prospères furent réduites à des ruines poussiéreuses, vestiges d’un passé glorieux. <br> Quant à l’empereur, il retourna dans son royaume avec la harpie à ses côtés, sachant qu'il avait perdu les terres mais gagné quelque chose de bien plus précieux : son humanité.
+				<br><br>
+				Dans les années qui suivirent, le Holy-Reich prospéra non pas par la conquête, mais par la sagesse et la compassion de son empereur. <br> La harpie, fidèle à sa parole, veilla sur lui et le conseilla, devenant l’ombre de l’empereur, tandis que son histoire et ainsi son existence disparurent avec la mort des anciens guerriers. <br> Et ainsi, même dans les Limbes, un monde divisé par le pouvoir et la foi, la lumière de la miséricorde brilla encore.
+			</h4>
+		</div>
+		
+		<h3>Musique découlant de la légende :</h3>
+		
+			<div class="decor">
+		<audio class="audio-player" src="Musiques/L'alliance divine.mp3"></audio>
+		<div class="custom-audio-player">
+			<button class="play-button control-button">Play</button>
+			<button class="pause-button control-button">Pause</button>
+			<button class="stop-button control-button">Stop</button>
+			<div class="progress-container">
+		<div class="progress-bar"></div>
+			</div>
+			<span class="timestamp">0:00 / 0:00</span>
+			<input type="range" class="volume-slider" min="0" max="1" step="0.01" value="0.7">
+		</div>
+		</div>
+		
+		<div class="decor">
+		<div class="content">
+		  <img src="paysages/Mosaique harpie.png">
+		</div>	
 		</div>
 		
 	</div>
 	
+	<div class="modal">
+		<div class="modal-content">
+			<div class="modal-navigation">
+				<button class="modal-prev" onclick="prevImage()">&lt;</button>
+				<div class="modal-image-container">
+				<img id="modal-img" src="" alt="" onclick="closeModal()">
+				</div>
+				<button class="modal-next" onclick="nextImage()">&gt;</button>
+			</div>
+				<div class="modal-caption" id="modal-caption"> </div>
+		</div>
+		<div class="modal-details"> </div>
+	</div>
+
+	<div class="lore" onclick="closelore()">
+		<div class="lore-content">
+			<div id="lore-caption"></div>			
+		</div>
+	</div>
+	
+	<script src="code.js"></script>
   </body>
 </html>

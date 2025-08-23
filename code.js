@@ -1,14 +1,14 @@
- function lore(element) {
-	var modal = document.querySelector(".lore");
-	var captionText = document.querySelector("#lore-caption");
-		modal.style.display = "flex";
-		captionText.innerHTML = element.querySelector("h4").innerHTML;
-}
+	function lore(element) {
+		var modal = document.querySelector(".lore");
+		var captionText = document.querySelector("#lore-caption");
+			modal.style.display = "flex";
+			captionText.innerHTML = element.querySelector("h4").innerHTML;
+	}
 
 
-function closelore() {
-	document.querySelector(".lore").style.display = "none";
-}
+	function closelore() {
+		document.querySelector(".lore").style.display = "none";
+	}
 
 document.addEventListener("keydown", handleKeyDown);
 
@@ -106,18 +106,23 @@ document.addEventListener('DOMContentLoaded', function() {
     const volumeSliders = document.querySelectorAll('.volume-slider');
     const timestamps = document.querySelectorAll('.timestamp');
   
+	console.log(`${audioPlayers.length} lecteur(s) audio détecté(s)`);
+  
     // Play function
     function playAudio(index) {
+		console.log(`Play demandé sur le lecteur ${index}`);
       audioPlayers[index].play();
     }
   
     // Pause function
     function pauseAudio(index) {
+		console.log(`Pause demandée sur le lecteur ${index}`);
       audioPlayers[index].pause();
     }
   
     // Stop function
     function stopAudio(index) {
+		console.log(`Stop demandé sur le lecteur ${index}`);
       audioPlayers[index].pause();
       audioPlayers[index].currentTime = 0;
     }
