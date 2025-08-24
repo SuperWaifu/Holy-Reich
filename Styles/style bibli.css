@@ -185,3 +185,97 @@
     z-index: 2000;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
+
+
+
+nav {
+  background: linear-gradient(201deg, rgba(2,0,36,1) 0%, rgba(91,24,157,1) 47%, rgba(99,25,0,1) 100%);;
+  padding: 0px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  height: 55px;
+  overflow: hidden;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+nav li {
+  margin: 0 10px;
+}
+
+nav li a {
+  display: block;
+  color: white;
+  font-size:25px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.2s;
+  padding:10px 10px;
+}
+
+nav li a:hover {
+  color: #f5c518;
+  transform: scale(1.1);
+  font-weight:bold;
+}
+
+.NAV-index {
+  height: 40px; /* Ajuste selon la taille de ton logo */
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+  transition: transform 0.2s;
+  filter: drop-shadow(0 0 15px white); /* Ombre blanche continue */
+}
+
+nav li:first-child {
+  margin-right: 20px; /* Ajoute un espace à droite du logo */
+}
+
+nav li a:hover .NAV-index {
+  transform: scale(1.1); /* Agrandissement au survol */
+  filter: brightness(1.2); /* Augmente la luminosité du logo au survol */
+}
+
+
+@font-face {
+  font-family: 'Hestina Font';
+  src: url('Police décriture/hestina/hestina.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Hestina Font';
+  }
+
+h1 {
+  font-size: 60px;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  margin-top: 50px;
+}
+h2 {
+  font-size: 40px;
+  font-style: oblique 10deg;
+  text-align: center;
+  color: white;
+}
+h3 {
+  font-size: 30px;
+  font-style: italic;
+  text-align: left;
+  color: white;
+  margin: 0px;
+}
+
+h4, h6 {
+  display:none;
+}
