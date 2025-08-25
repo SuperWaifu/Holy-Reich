@@ -1,0 +1,273 @@
+@font-face {
+  font-family: 'Hestina Font';
+  src: url('Police décriture/hestina/hestina.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(20,20,20,1) 50%, rgba(0,0,0,1) 100%);
+  font-family: 'Hestina Font'
+}
+
+h1 {
+  font-size: 60px;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  margin-top: 50px;
+}
+
+h2 {
+  font-size: 40px;
+  font-style: italic;
+  text-align: center;
+  color: white;
+  margin-left: 50px;
+}
+
+h3 {
+  font-size: 35px;
+  font-style: italic;
+  text-align: left;
+  color: white;
+  margin-left: 40px;
+  text-decoration: underline
+}
+
+h4 {
+  font-size: 40px;
+  text-align: center;
+  height: 100px;
+  overflow: hidden;
+}
+
+h4 a {
+  display: block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  transition: color 0.2s;s
+}
+
+h4 a:hover {
+  color: cyan;
+  transform: scale(1.2);
+  font-weight:bold;
+}
+
+.menulist {
+  flex: 1; /* Occuper l'espace disponible sans déborder */
+}
+
+.menulist ul {
+  font-size: 25px;
+  color: white;
+  padding-left: 2rem;
+  list-style-type: none;
+}
+.menulist li {
+  font-size: 35px;
+  color: white;
+  padding-left: 2rem;
+  list-style-type: none;
+}
+
+
+nav {
+  background: linear-gradient(201deg, rgba(2,0,36,1) 0%, rgba(91,24,157,1) 47%, rgba(99,25,0,1) 100%);;
+  padding: 0px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  height: 55px;
+  overflow: hidden;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+nav li {
+  margin: 0 10px;
+}
+
+nav li a {
+  display: block;
+  color: white;
+  font-size:25px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.2s;
+  padding:10px 10px;
+}
+
+nav li a:hover {
+  color: #f5c518;
+  transform: scale(1.1);
+  font-weight:bold;
+}
+
+.NAV-index {
+  height: 40px; /* Ajuste selon la taille de ton logo */
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+  transition: transform 0.2s;
+  filter: drop-shadow(0 0 15px white); /* Ombre blanche continue */
+}
+
+nav li:first-child {
+  margin-right: 20px; /* Ajoute un espace à droite du logo */
+}
+
+nav li a:hover .NAV-index {
+  transform: scale(1.1); /* Agrandissement au survol */
+  filter: brightness(1.2); /* Augmente la luminosité du logo au survol */
+}
+
+
+.music {
+    display: flex; /* Active le Flexbox pour centrer le contenu */
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
+    height: 100px; /* Ajustez la hauteur pour centrer verticalement */
+    margin: 0 auto; /* Centre le conteneur lui-même dans la page */
+}
+
+
+.decor-container {
+  position: relative; /* Nécessaire pour positionner le logo par rapport au conteneur */
+  display: flex; /* Utilise Flexbox pour aligner les éléments horizontalement */
+  justify-content: center; /* Centre horizontalement le drapeau dans la page */
+  align-items: center; /* Aligne verticalement le logo et le drapeau */
+  height: 500px; /* Ajustez selon vos besoins pour centrer verticalement */
+  margin: 50px auto; /* Ajoute un espace autour pour éviter tout chevauchement */
+}
+
+.app-container.left {
+  position: absolute; /* Permet de positionner le logo indépendamment du flux Flexbox */
+  left: 10%; /* Positionne le logo à gauche du conteneur centré */
+  flex: 1; /* Permet à l'espace entre le bord et le logo de s'adapter */
+  display: flex;
+  justify-content: flex-start; /* Place le logo du côté droit de son espace */
+}
+.app-container.right {
+  position: absolute;
+  right: 10%;
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+.app {
+  max-width: 100px; /* Ajuste la taille du logo */
+  border-radius: 5px; /* Ajoute un arrondi si nécessaire */
+  transition: transform 0.70s ease-in-out; /* Ajoute des animations */
+}
+
+.rotate-cw:hover {
+  transform: rotate(360deg);
+}
+.rotate-ccw:hover {
+  transform: rotate(-360deg);
+}
+
+.decor img {
+  max-width: 750px; /* Ajuste la taille du drapeau */
+  transition: transform 0.2s ease-in-out;
+}
+
+.decor img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.decor figcaption {
+  display: none;
+}
+
+.slideshow {
+  flex: 1; /* Occupe l'espace restant après la liste */
+  max-width: 400px; /* Limite la largeur du diaporama */
+  overflow: hidden; /* Cache les parties débordantes des images */
+  margin-left: 2rem; /* Espacement à gauche du diaporama */
+  box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+  display: flex; /* Utiliser Flexbox pour aligner les images horizontalement */
+  flex-wrap: nowrap; /* Empêche les images de passer à la ligne suivante */
+  margin-bottom: 20px; /* Ajoute de l'espace entre chaque diaporama */
+}
+
+.slideshow img {
+  width: 100%;
+  animation: slide 20s infinite; /* Animation CSS pour défiler les images */
+  border-radius: 5px;
+}
+
+.slideshow-container {
+    display: flex; /* Utiliser Flexbox pour aligner les diaporamas verticalement */
+    flex-direction: column; /* Aligne les diaporamas verticalement */
+    gap: 280px; /* Espace entre les diaporamas */
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0%);
+  }
+  25% {
+    transform: translateX(0%); /* Pause sur la première image */
+  }
+  33% {
+    transform: translateX(-100%);
+  }
+  58% {
+    transform: translateX(-100%); /* Pause sur la deuxième image */
+  }
+  66% {
+    transform: translateX(-200%);
+  }
+  91% {
+    transform: translateX(-200%); /* Pause sur la troisième image */
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.alligne {
+  display: flex; /* Positionner les éléments en ligne */
+  align-items: flex-start; /* Aligner les éléments en haut */
+  width: 100%; /* S'assurer que le conteneur utilise toute la largeur */
+  padding: 20px; /* Ajoute un padding autour de tout le conteneur */
+  box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+}
+
+.annonce {
+    width: 99.5%; /* Prend toute la largeur de la page */
+    overflow: hidden; /* Cache le texte débordant */
+    white-space: nowrap; /* Empêche le texte de passer à la ligne */
+    box-sizing: border-box; /* Inclut le padding dans la largeur */
+    background-color: rgba(0, 0, 0, 0.7); /* Ajoute un fond semi-transparent pour le contraste */
+    position: absolute; /* Fixe le bandeau en haut de la page */
+    z-index: 1000; /* Met le bandeau au-dessus de tout le reste */
+}
+
+.annonce p {
+    display: inline-block; /* Permet l'animation du texte en ligne */
+    padding-left: 100%; /* Départ en dehors de la vue */
+    font-size: 20px; /* Taille du texte */
+    color: white; /* Couleur du texte */
+    animation: scroll-text 60s linear infinite; /* Animation pour faire défiler le texte */
+}
+
+@keyframes scroll-text {
+    0% {
+        transform: translateX(0); /* Début du défilement à la position de départ */
+    }
+    100% {
+        transform: translateX(-100%); /* Fin du défilement, le texte a disparu à gauche */
+    }
+}
