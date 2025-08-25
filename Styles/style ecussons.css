@@ -1,0 +1,174 @@
+.ecusson {
+	display: flex;
+	justify-content: space-between; /* Espace entre les images-légendes */
+	align-items: flex-start; /* Alignement en haut du conteneur */
+	margin: 20px 0; /* Espace vertical autour du conteneur */
+	width: 100%; /* Prendre toute la largeur de la page */
+}
+
+        /* Nouveau conteneur pour chaque bloc image-légende */
+.image-block {
+	display: flex;
+	flex-direction: column; /* Disposition verticale pour image et légende */
+	align-items: center; /* Centrer l'image et la légende horizontalement */
+	width: 45%; /* Largeur de chaque bloc image-légende */
+}
+
+        /* Style pour les images */
+.image-block img {
+	max-width: 100%; /* L'image occupe toute la largeur du bloc */
+	height: auto; /* Conserver le ratio d'aspect de l'image */
+}
+
+        /* Style pour les légendes */
+.legend {
+	margin-top: 10px; /* Espacement entre l'image et la légende */
+	text-align: center;
+	text-decoration: underline; /* Souligner les légendes */
+	font-size : 25px;
+	color : lightgreen;
+}
+
+
+
+nav {
+  background: linear-gradient(201deg, rgba(2,0,36,1) 0%, rgba(91,24,157,1) 47%, rgba(99,25,0,1) 100%);;
+  padding: 0px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  height: 55px;
+  overflow: hidden;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+nav li {
+  margin: 0 10px;
+}
+
+nav li a {
+  display: block;
+  color: white;
+  font-size:25px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.2s;
+  padding:10px 10px;
+}
+
+nav li a:hover {
+  color: #f5c518;
+  transform: scale(1.1);
+  font-weight:bold;
+}
+
+.NAV-index {
+  height: 40px; /* Ajuste selon la taille de ton logo */
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+  transition: transform 0.2s;
+  filter: drop-shadow(0 0 15px white); /* Ombre blanche continue */
+}
+
+nav li:first-child {
+  margin-right: 20px; /* Ajoute un espace à droite du logo */
+}
+
+nav li a:hover .NAV-index {
+  transform: scale(1.1); /* Agrandissement au survol */
+  filter: brightness(1.2); /* Augmente la luminosité du logo au survol */
+}
+
+
+.lore {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+}
+
+.lore-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	height: auto;
+	color: white;
+	padding: 10px;
+	font-size: 20px;
+	text-align: center;
+}
+
+.LORE {
+    display: table-cell;
+    padding-left: 20px;
+    cursor: pointer;
+}
+
+@font-face {
+  font-family: 'Hestina Font';
+  src: url('Police décriture/hestina/hestina.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Hestina Font';
+  }
+
+h1 {
+  font-size: 60px;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  margin-top: 50px;
+}
+h2 {
+  font-size: 40px;
+  font-style: oblique 10deg;
+  text-align: center;
+  color: white;
+}
+h3 {
+  font-size: 30px;
+  font-style: italic;
+  text-align: left;
+  color: white;
+  margin: 0px;
+}
+
+h4, h6 {
+  display:none;
+}
+
+h8 {
+            background-color: #130c4d; /* Couleur de fond verte */
+            color: #f0e36b; /* Couleur du texte blanche */
+            padding: 10px 20px; /* Espacement intérieur pour ressembler à des boutons */
+            text-align: center; /* Centrer le texte à l'intérieur */
+            text-decoration: none; /* Supprimer la décoration de texte (soulignement) */
+            border: none; /* Aucun bordure */
+            border-radius: 5px; /* Coins arrondis pour un effet de bouton */
+            cursor: pointer; /* Curseur de souris en pointeur pour indiquer la cliquabilité */
+            font-size: 16px; /* Taille de la police */
+            margin: 5px; /* Espace autour de chaque bouton */
+            transition: background-color 0.3s ease; /* Transition pour l'effet hover */
+        }
+
+h8:hover {
+            background-color: #f0e36b; /* Couleur de fond changée lors du survol */
+			color: #130c4d;
+        }
