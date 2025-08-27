@@ -68,6 +68,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (playerCover) playerCover.src = cover;
             if (mainMusicCover) mainMusicCover.src = cover;
         }
+		
+		applyScrollingText(playerTitle);
+		applyScrollingText(playerArtist);
     }
 
     function togglePlayPause(audio) {
@@ -346,8 +349,78 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 	
-	
-	
+
+
+
+	function applyScrollingText(element) {
+		const text = element.textContent;
+		element.innerHTML = text;
+		element.classList.remove("scroll");
+
+		// mesurer largeur réelle du texte
+		const clone = document.createElement("span");
+		clone.style.visibility = "hidden";
+		clone.style.whiteSpace = "nowrap";
+		clone.style.position = "absolute";
+		clone.textContent = text;
+		document.body.appendChild(clone);
+		const textWidth = clone.getBoundingClientRect().width;
+		document.body.removeChild(clone);
+
+		if (textWidth > element.clientWidth) {
+			const container = document.createElement("span");
+			container.classList.add("scroll-container");
+			container.style.display = "inline-flex"; // <-- inline-flex pour éviter la ligne suivante
+			container.style.whiteSpace = "nowrap";
+
+			const gap = 50;
+			const buffer = 5; // sécurité pour le dernier caractère
+
+			// première copie
+			const span1 = document.createElement("span");
+			span1.textContent = text;
+			span1.style.display = "inline-block";
+			span1.style.paddingRight = `${gap + buffer}px`;
+			container.appendChild(span1);
+
+			// deuxième copie
+			const span2 = document.createElement("span");
+			span2.textContent = text;
+			span2.style.display = "inline-block";
+			span2.style.paddingRight = `${gap + buffer}px`;
+			container.appendChild(span2);
+
+			element.innerHTML = "";
+			element.appendChild(container);
+			element.classList.add("scroll");
+
+			// largeur totale du container
+			const totalWidth = textWidth * 2 + (gap + buffer) * 2;
+			container.style.width = `${totalWidth}px`;
+
+			// durée proportionnelle
+			const speed = 30; // pixels/sec
+			const duration = (textWidth + gap + buffer) / speed;
+			container.style.animationDuration = `${duration}s`;
+
+			// keyframes dynamiques
+			const styleId = "dynamic-marquee";
+			let styleTag = document.getElementById(styleId);
+			if (!styleTag) {
+				styleTag = document.createElement("style");
+				styleTag.id = styleId;
+				document.head.appendChild(styleTag);
+			}
+			styleTag.innerHTML = `
+				@keyframes marquee {
+					0% { transform: translateX(0); }
+					15% { transform: translateX(0); }
+					100% { transform: translateX(-${textWidth + gap + buffer}px); }
+				}
+			`;
+		}
+	}
+
 	
 	function showView(viewToShow) {
 	  const views = document.querySelectorAll('.view');
