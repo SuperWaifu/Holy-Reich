@@ -243,6 +243,7 @@ body {
 #music-info {
     display: flex;
     align-items: center;
+	min-width: 0;
 }
 
 #player-cover {
@@ -255,6 +256,31 @@ body {
     display: flex;
     flex-direction: column; /* Aligne les éléments verticalement */
     margin-left: 10px; /* Gardez le même espacement si nécessaire */
+	width: 350px;
+	overflow: hidden;
+	position: relative;
+}
+
+#player-details span { /* Animation défilante si le texte est trop long */
+    display: block;
+    overflow: hidden;
+	white-space: nowrap;
+}
+
+#player-details span.scroll-container {
+    display: flex;          /* pour les deux copies */
+	white-space: nowrap;
+    animation: marquee linear infinite;
+}
+#player-details span.scroll-container span {
+    margin-right: 50px;     /* distance entre fin et début */
+	white-space: nowrap;
+}
+
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    15% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
 
 #player-controls, #player-options {
