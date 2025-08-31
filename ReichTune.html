@@ -40,7 +40,8 @@
             <!-- Contenu de base -->
             <div id="classic-view" class="view active">
 			<div id="home-section">
-                <h1>Bienvenue</h1>
+                <h1>Bienvenue
+				<button id="lucky-btn" class="shuffle-btn">🎲 J'ai de la chance</button></h1>
                 <p>Explorez nos collections de musique.</p>
                 <!-- Listes de musiques avec catégories -->
 			<div id="music-lists">
@@ -192,15 +193,53 @@
 				</div>
 				<!-- Liste 5 -->
 				<div class="music-list">
-				<div class="list-title"><span>Pop culture</span>
+				<div class="list-title"><span>Bande originale du Velvet Rouge (Electro-Swing)</span>
 				<div class="buttons"><button class="play-all-btn" data-list-id="music-41">Tout lire ▶</button>
 				<button class="shuffle-btn" data-list-id="music-41">Aléatoire 🔀</button>
 				</div></div>
 				<div class="music-items-container">
-					<div class="music-item" id="music-41" data-title="La couronne d'Alita" data-artist="O'lyxar Studios" data-cover="Musiques/Cover/POP LCA.jpg">
+					<div class="music-item" id="music-41" data-title="Purple Side" data-artist="Charade Nocturne" data-cover="Musiques/Cover/VR PS.jpg">
+						<img src="Musiques/Cover/VR PS.jpg" alt="Album Cover" class="music-cover">
+						<h2 class="music-title">Purple Side</h2>
+						<h3 class="music-artist">Charade Nocturne</h3>
+					</div>
+					<div class="music-item" id="music-42" data-title="Nuit légère" data-artist="Charade Nocturne" data-cover="Musiques/Cover/VR NL.jpg">
+						<img src="Musiques/Cover/VR NL.jpg" alt="Album Cover" class="music-cover">
+						<h2 class="music-title">Nuit légère</h2>
+						<h3 class="music-artist">Charade Nocturne</h3>
+					</div>
+				</div>
+				</div>
+				<!-- Liste 6 -->
+				<div class="music-list">
+				<div class="list-title"><span>Pop culture</span>
+				<div class="buttons"><button class="play-all-btn" data-list-id="music-51">Tout lire ▶</button>
+				<button class="shuffle-btn" data-list-id="music-41">Aléatoire 🔀</button>
+				</div></div>
+				<div class="music-items-container">
+					<div class="music-item" id="music-51" data-title="La couronne d'Alita" data-artist="O'lyxar Studios" data-cover="Musiques/Cover/POP LCA.jpg">
 						<img src="Musiques/Cover/POP LCA.jpg" alt="Album Cover" class="music-cover">
 						<h2 class="music-title">La couronne d'Alita</h2>
 						<h3 class="music-artist">O'lyxar Studios</h3>
+					</div>
+				</div>
+				</div>
+				<!-- Liste 7 -->
+				<div class="music-list">
+				<div class="list-title"><span>Réédition de disques</span>
+				<div class="buttons"><button class="play-all-btn" data-list-id="music-61">Tout lire ▶</button>
+				<button class="shuffle-btn" data-list-id="music-41">Aléatoire 🔀</button>
+				</div></div>
+				<div class="music-items-container">
+					<div class="music-item" id="music-61" data-title="Oh ma jolie" data-artist="Archives de Korvagnor" data-cover="Musiques/Cover/OLD OMJ.jpg">
+						<img src="Musiques/Cover/OLD OMJ.jpg" alt="Album Cover" class="music-cover">
+						<h2 class="music-title">Oh ma jolie</h2>
+						<h3 class="music-artist">Archives de Korvagnor</h3>
+					</div>
+					<div class="music-item" id="music-62" data-title="Edelwynn" data-artist="Archives d'Edelwynn" data-cover="Musiques/Cover/OLD EDW.jpg">
+						<img src="Musiques/Cover/OLD EDW.jpg" alt="Album Cover" class="music-cover">
+						<h2 class="music-title">Edelwynn</h2>
+						<h3 class="music-artist">Archives d'Edelwynn</h3>
 					</div>
 				</div>
 				</div>
@@ -270,6 +309,10 @@
 	<audio id="audio-32" src="Musiques/Les échos de Melynas.mp3"></audio>
 	<audio id="audio-33" src="Musiques/KK FDS.mp3"></audio>
 	<audio id="audio-34" src="Musiques/KK LSM.mp3"></audio>
-	<audio id="audio-41" src="Musiques/POP LCA.mp3"></audio>
+	<audio id="audio-41" src="Musiques/VR PS.mp3"></audio>
+	<audio id="audio-42" src="Musiques/VR NL.mp3"></audio>
+	<audio id="audio-51" src="Musiques/POP LCA.mp3"></audio>
+	<audio id="audio-61" src="Musiques/OLD OMJ.mp3"></audio>
+	<audio id="audio-62" src="Musiques/OLD EDW.mp3"></audio>
 </body>
 </html>
