@@ -126,6 +126,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const dSector = document.getElementById('drawer-sector');
   const dDesc = document.getElementById('drawer-desc');
 
+  let lastFocusedElement = null;
+  let justClickedExpander = false;
+  let scrollTimer = null;
+
   // --------- Rendu du tableau -----------
   function renderTable() {
     const rows = COMPANIES.map(c => {
@@ -283,6 +287,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --------- Volet latéral ---------
   function openDrawer(company) {
+	lastFocusedElement = document.activeElement;
     drawer.setAttribute('aria-hidden','false');
     dTitle.textContent = `${company.name} (${company.ticker})`;
     dSub.textContent = company.name;
@@ -300,12 +305,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Focus manag.
     setTimeout(()=> drawer.querySelector('.drawer__close').focus(), 0);
   }
-  function closeDrawer(){ drawer.setAttribute('aria-hidden','true'); }
+  function closeDrawer(){ drawer.setAttribute('aria-hidden','true');
+  if (lastFocusedElement) {
+      lastFocusedElement.focus();
+    }
+    lastFocusedElement = null; // Nettoyer
+  }
 
   // --------- Événements ----------
   // Rendu initial
   renderTable();
   renderTopbar();
+  expanderBtn.setAttribute('aria-expanded', 'true');
 
   // Clic entreprise -> ouvrir volet
   tbody.addEventListener('click', (e) => {
@@ -321,24 +332,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Barre haute: expand/collapse
   expanderBtn.addEventListener('click', ()=>{
-    const expanded = expanderBtn.getAttribute('aria-expanded') === 'true';
-    expanderBtn.setAttribute('aria-expanded', String(!expanded));
-    if (expanded){
-      extraPanel.hidden = true;
-    } else {
-      extraPanel.hidden = false;
-    }
+    const wasExpanded = expanderBtn.getAttribute('aria-expanded') === 'true';
+    const isExpanded = !wasExpanded;
+    expanderBtn.setAttribute('aria-expanded', String(isExpanded));
+    extraPanel.hidden = !isExpanded; // Si on veut ouvrir (isExpanded=true), hidden devient false
+	justClickedExpander = true;
+    if (scrollTimer) clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => {
+      justClickedExpander = false;
+    }, 100);
   });
   // Repli au scroll
-  let lastScrollY = window.scrollY;
   window.addEventListener('scroll', ()=>{
-    // si on défile vers le bas et que le panneau est ouvert -> refermer
-    const expanded = expanderBtn.getAttribute('aria-expanded') === 'true';
-    if (expanded && Math.abs(window.scrollY - lastScrollY) > 10){
-      expanderBtn.setAttribute('aria-expanded','false');
-      extraPanel.hidden = true;
+	if (justClickedExpander) {
+      return;
     }
-    lastScrollY = window.scrollY;
+    if (window.scrollY > 10) {
+      // Dès qu'on défile (plus de 10px), on cache
+      extraPanel.hidden = true;
+	  expanderBtn.setAttribute('aria-expanded', 'false');
+    } else {
+      // On est revenu TOUT en haut
+      // On restaure la visibilité en fonction de l'état du bouton
+      const isExpanded = expanderBtn.getAttribute('aria-expanded') === 'true';
+      extraPanel.hidden = !isExpanded;
+    }
   }, {passive:true});
 
   // Boucle d’updates
